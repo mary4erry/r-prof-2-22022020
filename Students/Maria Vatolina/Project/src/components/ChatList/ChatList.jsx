@@ -71,12 +71,12 @@ const useStyles = (theme => ({
    }
 }))
 
-class Chats extends Component {
+class ChatList extends Component {
    constructor (props) {
       super(props)
    }
    static propTypes = {
-      chatId: PropTypes.number,
+      chatId: PropTypes.number.isRequired,
       chats: PropTypes.object,
       messages: PropTypes.object,
       classes: PropTypes.object,
@@ -166,4 +166,4 @@ const mapStateToProps = ({ chatReducer }) => ({
 })
 const mapDispatchToProps = dispatch => bindActionCreators({ addChat }, dispatch)
 
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(useStyles)(Chats))
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(useStyles)(ChatList))

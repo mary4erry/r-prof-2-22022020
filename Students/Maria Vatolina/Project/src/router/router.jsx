@@ -1,8 +1,6 @@
 import React from 'react'
+import { Switch, Route, Redirect } from 'react-router-dom'
 
-
-import { Switch, Route } from 'react-router-dom'
-// import { render } from 'react-dom'
 import Layout from '../components/Layout/Layout.jsx'
 
 export default class Router extends React.Component {
@@ -10,10 +8,9 @@ export default class Router extends React.Component {
         return (
             <Switch>
                 <Route exact path = "/" component = { Layout } />
-                <Route path="/chat/:chatId" component= { Layout }/> }/>
-                {/* <Route exact path = "chat/1" render = {
-                    () => <Layout chatId = { 1 } /> } />
-                 */}
+                <Route exact path="/chat" render={ () => <Redirect to="/" /> } />
+                <Route path="/chat/:chatId" 
+                        render={ obj => <Layout chatId={ Number(obj.match.params.chatId) } /> }/>
             </Switch>
         );
     }

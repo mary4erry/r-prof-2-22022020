@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 
 import Header from '../Header/Header.jsx'
 import Messages from '../MessagesField/MessagesField.jsx'
-import Chats from '../ChatList/ChatList.jsx'
+import ChatList from '../ChatList/ChatList.jsx'
 
 //store
 import {connect} from 'react-redux';
@@ -28,10 +28,10 @@ class Layout extends React.Component {
 
         return(
             <div className="container">
-                <Header title={ this.props.chatId }/>
+                <Header chatId={ this.props.chatId }/>
                 <Grid container spacing={0}>
                     <Grid item xs={3} >
-                    <Chats chatId={ chatId } chats={ chats } messages={ messages } />
+                    <ChatList chatId={ chatId } chats={ chats } messages={ messages } />
                </Grid>
                <Grid item xs={9}>
                   <Messages chatId={ chatId } chats={ chats } messages={ messages } sendMessage={ sendMessage } />
