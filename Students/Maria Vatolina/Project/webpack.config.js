@@ -13,6 +13,7 @@ module.exports = {
     },
     mode: 'development', 
     // mode: 'production',
+    devtool: 'eval-source-map',
     devServer: {
         contentBase: './dist',
         port: 3000,
@@ -46,7 +47,11 @@ module.exports = {
                     },
                   'css-loader',
                 ],
-            }
+            },
+            {
+                test: /\.(ttf|woff|woff2|eot)$/,
+                use: ['file-loader'],
+             }
         ]
     },
     plugins: [
