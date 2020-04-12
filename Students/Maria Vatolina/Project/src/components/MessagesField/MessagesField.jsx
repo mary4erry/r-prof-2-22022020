@@ -43,7 +43,7 @@ class Messages extends Component {
    constructor(props) {
       super(props)
       this.state = {
-         usr: 'Darth Vader',
+         usr: 'Me',
          msg: '',
       }   
    }

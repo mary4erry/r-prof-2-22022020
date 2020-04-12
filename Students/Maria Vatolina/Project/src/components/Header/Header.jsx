@@ -26,9 +26,9 @@ class Header extends React.Component {
       chatId: PropTypes.number,
   }
 
-//   static defaultProps = {
-//       chatId: 1,
-//   }
+  static defaultProps = {
+      chatId: 1,
+  }
   render() {
    const { classes } = this.props
 

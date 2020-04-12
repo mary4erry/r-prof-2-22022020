@@ -108,14 +108,14 @@ class ChatList extends Component {
       const { classes, chats, chatId, title } = this.props
       let ChatRoomsArray = []
 
-      Object.keys(chats).forEach(chatId => {
+      Object.keys(chats).forEach(chatRoomId => {
          ChatRoomsArray.push(
             <Chat
-               link={ `/chat/${chatId}` }
-               title={ chats[chatId].title}
-               message={ chats[chatId].message }
-               // isSelected={ chatId === +chatRoomId }
-               key={ chatId } />
+               link={ `/chat/${chatRoomId}` }
+               title={ chats[chatRoomId].title}
+               message={ chats[chatRoomId].message }
+               isSelected={ chatId === +chatRoomId }
+               key={ chatRoomId } />
          )
       })
 

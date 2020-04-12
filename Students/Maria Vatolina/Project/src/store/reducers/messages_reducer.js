@@ -4,17 +4,20 @@ import { SEND_MSG } from '../actions/messages_actions.js'
 const initialStore = {
     messages: {
         1: {
+            1: { user: 'Support', text: 'Describe your problem'},
+            2: { user: 'Me', text: 'The program is not working!'},
+            3: { user: 'Support', text: 'Have you tried turning it off and on again?' },
+            4: { user: 'Me', text: 'It does not work anyway'}
+        },
+        2: {
             1: { user: 'Darth Vader', text: 'Halo'},
             2: { user: null, text: null},
             3: { user: 'Darth Vader', text: 'I am your father' },
             4: { user: null, text: 'NOOOOOOOOO' }
         },
-        2: {
-            1: { user: 'Support', text: 'Describe your problem'} 
-        },
         3: {
             1: { user: 'Friend', text: 'Hi! How you doing'},
-            2: { user: 'You', text: 'ok'},
+            2: { user: 'Me', text: 'ok'}
         }
     }
 }

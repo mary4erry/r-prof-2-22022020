@@ -19,6 +19,7 @@ const useStyles = makeStyles(theme => ({
    },
    selected: {
       backgroundColor: theme.palette.primary.main,
+      color: theme.palette.secondary.main,
    },
    avatar: {
       backgroundColor: theme.palette.common.white,
@@ -29,15 +30,13 @@ const useStyles = makeStyles(theme => ({
 let chat = (props) => {
    const classes = useStyles()
 
-   const {  chats, title, message, chatId, link } = props 
+   const {  chats, title, message, chatId, link, isSelected } = props 
    
    return (
          <Link to={ link }>
-            <ListItem divider={ true } button className={classes.item}>
+            <ListItem divider={ true } button className={isSelected ? classes.selected : classes.item}>
                <ListItemAvatar>
-                  <Badge color="secondary" overlap="circle" variant="dot">
-                     <Avatar className={classes.avatar}>  </Avatar>
-                  </Badge>
+                  <Avatar className={classes.avatar}> { title[0].toUpperCase()} </Avatar>
                </ListItemAvatar>
                <ListItemText primary={title} 
                secondary={ message } />
@@ -46,7 +45,4 @@ let chat = (props) => {
    )
 }
 
-{/* <Divider variant="inset" component="li" /> */}
-
 export default chat
-// export default withStyles(useStyles)(Chat)

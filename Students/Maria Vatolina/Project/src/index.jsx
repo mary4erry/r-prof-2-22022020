@@ -20,7 +20,7 @@ import initStore from './store/store.js'
 import Router from './router/router.jsx'
 import { BrowserRouter } from 'react-router-dom'
 
-let user = 'Darth Vader'
+// let user = 'Darth Vader'
 
 const theme = createMuiTheme({
     palette: {

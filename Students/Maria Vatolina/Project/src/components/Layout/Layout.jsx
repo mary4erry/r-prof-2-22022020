@@ -24,14 +24,14 @@ class Layout extends React.Component {
      }
 
     render() {
-        let { chatId, chats, messages, sendMessage } = this.props
+        let { chatId, chats, messages, title, sendMessage } = this.props
 
         return(
             <div className="container">
-                <Header chatId={ this.props.chatId }/>
+                <Header chatId={ chatId }/>
                 <Grid container spacing={0}>
                     <Grid item xs={3} >
-                    <ChatList chatId={ chatId } chats={ chats } messages={ messages } />
+                    <ChatList chatId={ chatId } chats={ chats } title={ title } messages={ messages } />
                </Grid>
                <Grid item xs={9}>
                   <Messages chatId={ chatId } chats={ chats } messages={ messages } sendMessage={ sendMessage } />

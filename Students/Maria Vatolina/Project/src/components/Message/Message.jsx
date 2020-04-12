@@ -21,12 +21,12 @@ const useStyles = makeStyles(theme => ({
   }))
 
 let msg = (props) => {
-    const classes = useStyles()
+   const classes = useStyles()
 
-    let { sender, text, chatId, chats} = props
-    sender ? sender = sender : sender = 'Luke'
+   let { sender, text, chatId, chats} = props
+   sender ? sender = sender : sender = chats[chatId].title
 
-   let boxView = props.sender ? classes.myText : classes.answer
+   let boxView = (sender === 'Me' ? classes.myText : classes.answer)
 
     return (
         <Grid container wrap="nowrap" className={ classes.root }>

@@ -3,8 +3,8 @@ import { ADD_CHAT } from '../actions/chat_actions.js'
 
 let initialStore = {
     chats: {
-        1: { title: "Darth Vader"},
-        2: { title: "Support"},
+        1: { title: "Support" },
+        2: { title: "Darth Vader"},
         3: { title: "Friend"},
     }
 }
