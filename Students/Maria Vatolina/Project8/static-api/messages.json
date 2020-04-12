@@ -1,0 +1,30 @@
+[
+    {
+       "_id":"5e7129a13189dd346227cf95",
+       "messageId":"1",
+       "sender":"Support",
+       "text":"Hello! Can I help you?",
+       "chatId":"5e73426e28fbcc368e3cdc4a"
+    },
+    {
+       "_id":"5e7129c43189dd346227cf96",
+       "messageId":"2",
+       "sender":"Me",
+       "text":"It doesn't work!",
+       "chatId":"5e73426e28fbcc368e3cdc4a"
+    },
+    {
+       "_id":"5e712a0e3189dd346227cf99",
+       "messageId":"3",
+       "sender":"Darth Vader",
+       "text":"Luke, I'm your father!",
+       "chatId":"5e73431528fbcc368e3cdc4b"
+    },
+    {
+       "_id":"5e712a1d3189dd346227cf9a",
+       "messageId":"4",
+       "sender":"Friend",
+       "text":"How you dooooing?",
+       "chatId":"5e73436bdf204037f2c13626"
+    },
+]
