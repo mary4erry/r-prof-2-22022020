@@ -1,6 +1,5 @@
 import React from 'react'
 import ReactDom from 'react-dom'
-import {Link} from 'react-router-dom'
 
 import { ListItem, ListItemAvatar, ListItemText, Avatar, 
          Badge, Box } from "@material-ui/core"

@@ -15,7 +15,6 @@ import Chat from '../Chat/Chat.jsx'
 import Footer from '../ChatFooter/ChatFooter.jsx'
 
 //store
-//store
 import {addChat} from '../../store/actions/chat_actions.js';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
