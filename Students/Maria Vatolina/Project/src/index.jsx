@@ -9,9 +9,6 @@ import 'typeface-roboto'
 
 import Layout from './components/Layout/Layout.jsx'
 
-// import Messages from './components/MessagesField/MessagesField.jsx'
-// import Chats from './components/ChatList/ChatList.jsx'
-
 //store
 import { Provider } from 'react-redux'
 import initStore from './store/store.js'
@@ -19,6 +16,9 @@ import initStore from './store/store.js'
 
 import Router from './router/router.jsx'
 import { BrowserRouter } from 'react-router-dom'
+
+import { ConnectedRouter } from 'connected-react-router'
+import { history } from './store/store.js'
 
 // let user = 'Darth Vader'
 
@@ -40,12 +40,12 @@ const theme = createMuiTheme({
 })
 
 ReactDom.render (
-   <BrowserRouter>
       <Provider store = { initStore() }>
-         <ThemeProvider theme={theme}>
-            <Router />
-         </ThemeProvider>
+         <ConnectedRouter history={ history }>
+            <ThemeProvider theme={theme}>
+               <Router />
+            </ThemeProvider>
+         </ConnectedRouter>
       </Provider>
-   </BrowserRouter>
    , document.getElementById('app')
 )

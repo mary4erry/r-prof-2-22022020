@@ -30,18 +30,22 @@ const useStyles = makeStyles(theme => ({
 let chat = (props) => {
    const classes = useStyles()
 
-   const {  chats, title, message, chatId, link, isSelected } = props 
+   
+   const { handleNavigate, chats, title, message, chatId, link, isSelected } = props 
    
    return (
-         <Link to={ link }>
-            <ListItem divider={ true } button className={isSelected ? classes.selected : classes.item}>
+         // <Link to={ link }>
+            <ListItem 
+            divider={ true } button 
+            className={isSelected ? classes.selected : classes.item}
+            onClick = { () => handleNavigate(link) }>
                <ListItemAvatar>
                   <Avatar className={classes.avatar}> { title[0].toUpperCase()} </Avatar>
                </ListItemAvatar>
                <ListItemText primary={title} 
                secondary={ message } />
             </ListItem>
-         </Link>
+         // </Link>
    )
 }
 

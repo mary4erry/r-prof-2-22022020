@@ -20,7 +20,7 @@ const useStyles = (theme => ({
       overflow: 'auto'
    },
    msgBlock: {
-      height: 'calc(100vh - 200px)',
+      height: 'calc(100vh - 163px)',
       display: 'flex',
       flexDirection: 'column',
       justifyContent: 'flex-end',
@@ -58,8 +58,8 @@ class Messages extends Component {
 
    handleSendMessage = (text, sender) => {
       this.setState({ msg: '' })
-      if (sender == 'Me')
-         this.sendMsg (text, sender) 
+      // if (sender == 'Me')
+      //    this.sendMsg (text, sender) 
    }
 
    handleChange = (event) => {
@@ -71,16 +71,16 @@ class Messages extends Component {
          }
    }
 
-   componentDidUpdate (prevProps) {
-      const { messages, chatId } = this.props;
-      let chatMessages = messages[chatId]
-      if (Object.keys(prevProps.messages).length < Object.keys(chatMessages).length && 
-      chatMessages[Object.keys(chatMessages).length].user === this.state.usr) {
-         setTimeout(() => {
-         this.sendMsg('Please, wait...');
-         }, 500)
-      }
-   }
+   // componentDidUpdate (prevProps) {
+   //    const { messages, chatId } = this.props;
+   //    let chatMessages = messages[chatId]
+   //    if (Object.keys(prevProps.messages).length < Object.keys(chatMessages).length && 
+   //    chatMessages[Object.keys(chatMessages).length].user === this.state.usr) {
+   //       setTimeout(() => {
+   //       this.sendMsg('Please, wait...');
+   //       }, 500)
+   //    }
+   // }
 
    componentDidMount() {
       

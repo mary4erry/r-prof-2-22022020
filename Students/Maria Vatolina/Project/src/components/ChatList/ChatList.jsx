@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import ReactDom from 'react-dom'
 import PropTypes from 'prop-types'
+import { push } from 'connected-react-router'
 
 
 import { Box, AppBar, Toolbar, IconButton, 
@@ -73,16 +74,20 @@ class ChatList extends Component {
    }
    static propTypes = {
       chatId: PropTypes.number.isRequired,
-      chats: PropTypes.object,
+      chats: PropTypes.object.isRequired,
       messages: PropTypes.object,
       classes: PropTypes.object,
       addChat: PropTypes.func.isRequired,
+      push: PropTypes.func.isRequired,
    }
    // static deafultProps = {
    //    chatId: 1
    // }
    state = {
       input: ''
+   }
+   handleNavigate = (link) => {
+      this.props.push(link)
    }
    handleChange = (evt) => {
       this.setState({ [evt.target.name]:evt.target.value })
@@ -107,11 +112,13 @@ class ChatList extends Component {
       Object.keys(chats).forEach(chatRoomId => {
          ChatRoomsArray.push(
             <Chat
+               handleNavigate={ this.handleNavigate }
                link={ `/chat/${chatRoomId}` }
                title={ chats[chatRoomId].title}
                message={ chats[chatRoomId].message }
                isSelected={ chatId === +chatRoomId }
-               key={ chatRoomId } />
+               key={ chatRoomId } 
+               />
          )
       })
 
@@ -160,6 +167,6 @@ class ChatList extends Component {
 const mapStateToProps = ({ chatReducer }) => ({
    chats: chatReducer.chats
 })
-const mapDispatchToProps = dispatch => bindActionCreators({ addChat }, dispatch)
+const mapDispatchToProps = dispatch => bindActionCreators({ addChat, push }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(useStyles)(ChatList))
