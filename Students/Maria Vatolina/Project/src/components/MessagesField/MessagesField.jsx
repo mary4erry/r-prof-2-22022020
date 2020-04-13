@@ -16,15 +16,11 @@ import { bindActionCreators } from 'redux'
 import connect from 'react-redux/es/connect/connect'
 
 const useStyles = (theme => ({
-   root: {
-       heigth: '100vh',
-       width: "100%"
-    },
    msgList: {
       overflow: 'auto'
    },
    msgBlock: {
-      height: 'calc(100vh - 160px)',
+      height: 'calc(100vh - 200px)',
       display: 'flex',
       flexDirection: 'column',
       justifyContent: 'flex-end',
@@ -35,6 +31,7 @@ const useStyles = (theme => ({
       position: 'static',
       display: 'flex',
       justifyContent: 'space-between',
+      padding: theme.spacing(1, 2, 0, 2)
    }
  }))
 

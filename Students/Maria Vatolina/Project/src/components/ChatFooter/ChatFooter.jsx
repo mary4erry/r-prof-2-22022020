@@ -8,7 +8,7 @@ import { ForumRounded, AccountCircleRounded, Settings } from '@material-ui/icons
 const useStyles = makeStyles(theme => ({
   appBar: {
     width: '100%',
-    flexGrow: 1,
+    // flexGrow: 1,
     backgroundColor: theme.palette.background.paper,
     boxShadow: 'none',
     borderTop: '1px solid',
@@ -19,7 +19,7 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-let tabbar = () => {
+let chatListFooter = () => {
 
 const classes = useStyles()
 
@@ -40,5 +40,5 @@ const classes = useStyles()
   )
 }
 
-export default tabbar
+export default chatListFooter
 

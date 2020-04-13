@@ -21,19 +21,15 @@ import {bindActionCreators} from 'redux';
 
 const useStyles = (theme => ({
    root: {
-      // display: 'flex',
-      // // height: 'calc(100vh - 145px)',
-      // flexDirection: 'column',
-      // justifyContent: 'flex-start',
       borderRight: '4px solid rgba(0, 0, 0, .1)',
    },
    chatList: {
-      height: 'calc(100vh - 145px)',
+      height: 'calc(100vh - 211px)',
       padding: theme.spacing(1, 0),
       backgroundColor: theme.palette.background.paper,
       color: theme.palette.common.white
    },
-    grow: {
+   grow: {
       // flexGrow: 1,
       width: '100%',
       backgroundColor: theme.palette.background.paper,
@@ -66,8 +62,8 @@ const useStyles = (theme => ({
       padding: theme.spacing(0),
    },
    addInput: {
-      color: theme.palette.common.white,
-      padding: theme.spacing(1, 1, 1, 5),
+      color: theme.palette.common.white, 
+      padding: theme.spacing(1, 0, 1, 4),
    }
 }))
 
