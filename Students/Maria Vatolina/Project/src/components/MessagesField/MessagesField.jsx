@@ -48,7 +48,7 @@ class Messages extends Component {
       }   
    }
 
-   sendMessage = (text, sender) => {
+   sendMsg = (text, sender) => {
       // console.log('props:', this.props)
       let { chatId, messages, sendMessage } = this.props
       let chatMessages = messages[chatId]
@@ -61,15 +61,15 @@ class Messages extends Component {
 
    handleSendMessage = (text, sender) => {
       this.setState({ msg: '' })
-      if (sender == 'Darth Vader')
-         this.sendMessage (text, sender) 
+      if (sender == 'Me')
+         this.sendMsg (text, sender) 
    }
 
    handleChange = (event) => {
          if (event.keyCode !== 13 ) {
            this.setState({ msg: event.target.value })           
          } else {
-            this.sendMessage(this.state.msg, this.state.usr)
+            this.sendMsg(this.state.msg, this.state.usr)
             this.setState({ msg: ''})
          }
    }
@@ -80,16 +80,13 @@ class Messages extends Component {
       if (Object.keys(prevProps.messages).length < Object.keys(chatMessages).length && 
       chatMessages[Object.keys(chatMessages).length].user === this.state.usr) {
          setTimeout(() => {
-         this.sendMessage('Please, wait...');
+         this.sendMsg('Please, wait...');
          }, 500)
       }
-
-      this.scrollToBottom()
    }
 
    componentDidMount() {
       
-      this.scrollToBottom();
    }
 
    scrollToBottom = () => {
