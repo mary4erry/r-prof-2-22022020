@@ -51,9 +51,19 @@ class Messages extends Component {
       let chatMessages = messages[chatId]
       const messageId = Object.keys(chatMessages).length + 1;
 
-      sendMessage(chatId, messageId, sender, text)
+      // sendMessage(chatId, messageId, sender, text)
       // console.log('chatMessages:', messageId)
-      this.scrollToBottom()   
+      this.scrollToBottom()  
+      
+      let newMsg = {
+         sender: sender,
+         text: text,
+         chatId: '1'
+      }
+      fetch('api/message', {
+         method: 'POST', headers: { 'Content-Type': 'application/json' },
+         body: JSON.stringify(newMsg)
+     }) 
    }
 
    handleSendMessage = (text, sender) => {
@@ -71,6 +81,18 @@ class Messages extends Component {
          }
    }
 
+   componentDidMount() {
+      let msgs = null
+      
+      fetch('api/messages')
+      .then(d => d.json())
+      .then(data => msgs = data)
+      .finally(() => {
+         console.log(msgs);
+      })
+
+      this.scrollToBottom();
+   }
    // componentDidUpdate (prevProps) {
    //    const { messages, chatId } = this.props;
    //    let chatMessages = messages[chatId]
@@ -81,10 +103,6 @@ class Messages extends Component {
    //       }, 500)
    //    }
    // }
-
-   componentDidMount() {
-      
-   }
 
    scrollToBottom = () => {
       this.mesagesRef.current.lastElementChild.scrollIntoView({ behavior: 'smooth' })
