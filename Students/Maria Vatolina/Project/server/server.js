@@ -18,14 +18,28 @@ app.listen(3300, () => {
     console.log('listening 3300...')
 })
 
-//API
+//API for messages
 app.post('/message', async (req, res) => {
     let message = new Message(req.body)
     message = await message.save()
-    res.send(JSON.stringify({status: 1}))
+    // res.send(JSON.stringify({status: 1}))
+    res.json(({status: 1}))
 })
 
 app.get('/messages', async (req, res) => {
+    // console.log(req);
+    
     const messages = await Message.find()
     res.json(messages)
+})
+//API for chats
+app.get('/chats', async (req, res) => {
+    const chats = await Chat.find()
+    res.json(chats)
+})
+app.post('/chat', async (req, res) => {
+    let chat = new Chat(req.body)
+    chat = await chat.save()
+    // res.send(JSON.stringify({status: 1}))
+    res.json(chats)
 })

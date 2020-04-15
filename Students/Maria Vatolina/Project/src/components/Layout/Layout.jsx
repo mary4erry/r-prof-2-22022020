@@ -16,7 +16,7 @@ class Layout extends React.Component {
     static propTypes = {
         chatId: PropTypes.number,
         chats: PropTypes.object,
-        messages: PropTypes.object,
+        // messages: PropTypes.object,
         sendMessage: PropTypes.func,
      }
      static defaultProps = {

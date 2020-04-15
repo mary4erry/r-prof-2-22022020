@@ -1,15 +1,16 @@
 import React, {Component} from 'react';
 import ReactDom from 'react-dom';
+import PropTypes from 'prop-types'
+
 import './style.css';
-import { Input, IconButton, Box } from '@material-ui/core'
+import { Input, IconButton, Box, CircularProgress } from '@material-ui/core'
 import { Send, SentimentVerySatisfiedRounded, AttachmentRounded } from '@material-ui/icons'
 import { withStyles } from '@material-ui/core/styles'
 
-import Header from '../Header/Header.jsx'
 import Message from '../Message/Message.jsx'
 
 //ACTIONS
-import { sendMessage } from '../../store/actions/messages_actions.js'
+import { sendMessage, loadMessages } from '../../store/actions/messages_actions.js'
 
 //redux
 import { bindActionCreators } from 'redux'
@@ -44,54 +45,26 @@ class Messages extends Component {
          msg: '',
       }   
    }
+   static propTypes = {
+      isLoading: PropTypes.bool.isRequired,
+   }     
 
-   sendMsg = (text, sender) => {
-      // console.log('props:', this.props)
-      let { chatId, messages, sendMessage } = this.props
-      let chatMessages = messages[chatId]
-      const messageId = Object.keys(chatMessages).length + 1;
-
-      // sendMessage(chatId, messageId, sender, text)
-      // console.log('chatMessages:', messageId)
-      this.scrollToBottom()  
-      
-      let newMsg = {
-         sender: sender,
-         text: text,
-         chatId: '1'
-      }
-      fetch('api/message', {
-         method: 'POST', headers: { 'Content-Type': 'application/json' },
-         body: JSON.stringify(newMsg)
-     }) 
-   }
-
-   handleSendMessage = (text, sender) => {
-      this.setState({ msg: '' })
-      // if (sender == 'Me')
-      //    this.sendMsg (text, sender) 
+   handleSendMessage = (sender, text, chatId) => {
+      this.props.sendMessage(sender, text, chatId)
    }
 
    handleChange = (event) => {
          if (event.keyCode !== 13 ) {
            this.setState({ msg: event.target.value })           
-         } else {
-            this.sendMsg(this.state.msg, this.state.usr)
-            this.setState({ msg: ''})
-         }
+         } 
+         // else {
+         //    this.sendMsg(this.state.msg, this.state.usr)
+         //    this.setState({ msg: ''})
+         // }
    }
 
    componentDidMount() {
-      let msgs = null
-      
-      fetch('api/messages')
-      .then(d => d.json())
-      .then(data => msgs = data)
-      .finally(() => {
-         console.log(msgs);
-      })
-
-      this.scrollToBottom();
+      this.props.loadMessages();
    }
    // componentDidUpdate (prevProps) {
    //    const { messages, chatId } = this.props;
@@ -109,16 +82,20 @@ class Messages extends Component {
    }
 
    render() {
+      if (this.props.isLoading) {
+         return <CircularProgress />
+      }
+
       let { messages, classes, chatId, chats } = this.props
       let chatMessages = messages[chatId]
 
       let MessagesArr = []
 
-      Object.keys(chatMessages).forEach(messageId => {
+      Object.keys(messages).forEach(messageId => {
          MessagesArr.push( 
             <Message 
-            sender={ chatMessages[messageId].user } 
-            text={ chatMessages[messageId].text } 
+            sender={ messages[messageId].user } 
+            text={ messages[messageId].text } 
             key={ messageId }
             chatId={ chatId }
             chats={ chats }
@@ -141,7 +118,7 @@ class Messages extends Component {
                   onKeyUp={ this.handleChange }
                   value={ this.state.msg }/>
             </Box>
-            <IconButton aria-label="send" onClick={ () => this.handleSendMessage(this.state.msg, this.state.usr) }>
+            <IconButton aria-label="send" onClick={ () => this.handleSendMessage( this.state.usr, this.state.msg, 1 ) }>
                <Send />
             </IconButton>
             <IconButton aria-label="smile">
@@ -158,8 +135,10 @@ class Messages extends Component {
 }
 
 const mapStateToProps = ({ msgReducer }) => ({
-   messages: msgReducer.messages
+   messages: msgReducer.messages,
+   // chats: chatReducer.chats,
+   isLoading: msgReducer.isLoading,
 })
-const mapDispatchToProps = dispatch => bindActionCreators({ sendMessage }, dispatch)
+const mapDispatchToProps = dispatch => bindActionCreators({ sendMessage, loadMessages }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(useStyles)(Messages))

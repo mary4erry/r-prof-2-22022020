@@ -74,7 +74,7 @@ class ChatList extends Component {
    static propTypes = {
       chatId: PropTypes.number.isRequired,
       chats: PropTypes.object.isRequired,
-      messages: PropTypes.object,
+      // messages: PropTypes.object,
       classes: PropTypes.object,
       addChat: PropTypes.func.isRequired,
       push: PropTypes.func.isRequired,

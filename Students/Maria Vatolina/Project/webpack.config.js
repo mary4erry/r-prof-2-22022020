@@ -15,7 +15,7 @@ module.exports = {
     // mode: 'production',
     devtool: 'eval-source-map',
     devServer: {
-        contentBase: './dist',
+        // contentBase: './dist',
         port: 3000,
         hot: true,
         open: false,
