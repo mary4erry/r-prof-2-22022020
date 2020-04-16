@@ -49,8 +49,18 @@ class Messages extends Component {
       isLoading: PropTypes.bool.isRequired,
    }     
 
-   handleSendMessage = (sender, text, chatId) => {
-      this.props.sendMessage(sender, text, chatId)
+   // handleSendMessage = (sender, text, chatId) => {
+   //    this.props.sendMessage(sender, text, chatId)
+   // }
+
+   sendMsg = ( sender, text) => {
+      let { chatId, sendMessage } = this.props
+      sendMessage(chatId, sender, text)
+   }
+
+   handleSendMessage = (sender, text) => {
+      this.setState({ msg: ''})
+      if (text.length > 0) this.sendMsg( sender, text)
    }
 
    handleChange = (event) => {
@@ -87,7 +97,7 @@ class Messages extends Component {
       }
 
       let { messages, classes, chatId, chats } = this.props
-      let chatMessages = messages[chatId]
+      // let chatMessages = messages[chatId]
 
       let MessagesArr = []
 

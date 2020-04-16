@@ -15,7 +15,8 @@ import Chat from '../Chat/Chat.jsx'
 import Footer from '../ChatFooter/ChatFooter.jsx'
 
 //store
-import {addChat} from '../../store/actions/chat_actions.js';
+import {addChat, loadChats } from '../../store/actions/chat_actions.js';
+
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 
@@ -77,11 +78,10 @@ class ChatList extends Component {
       // messages: PropTypes.object,
       classes: PropTypes.object,
       addChat: PropTypes.func.isRequired,
+      loadChats: PropTypes.func.isRequired,
       push: PropTypes.func.isRequired,
    }
-   // static deafultProps = {
-   //    chatId: 1
-   // }
+   
    state = {
       input: ''
    }
@@ -102,9 +102,11 @@ class ChatList extends Component {
          this.setState({ input: '' })
       }
    }
+   componentDidMount() {
+      this.props.loadChats()
+   }
 
    render() {
-
       const { classes, chats, chatId, title } = this.props
       let ChatRoomsArray = []
 
@@ -117,7 +119,7 @@ class ChatList extends Component {
                message={ chats[chatRoomId].message }
                isSelected={ chatId === +chatRoomId }
                key={ chatRoomId } 
-               />
+            />
          )
       })
 
@@ -166,6 +168,6 @@ class ChatList extends Component {
 const mapStateToProps = ({ chatReducer }) => ({
    chats: chatReducer.chats
 })
-const mapDispatchToProps = dispatch => bindActionCreators({ addChat, push }, dispatch)
+const mapDispatchToProps = dispatch => bindActionCreators({ addChat, loadChats, push }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(useStyles)(ChatList))

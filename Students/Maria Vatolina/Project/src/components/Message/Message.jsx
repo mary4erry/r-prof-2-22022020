@@ -23,8 +23,8 @@ const useStyles = makeStyles(theme => ({
 let msg = (props) => {
    const classes = useStyles()
 
-   let { sender, text, chatId, chats} = props
-   sender ? sender = sender : sender = chats[chatId].title
+   let { chatId, sender, text} = props
+   sender ? sender = sender : sender = "Me"
 
    let boxView = (sender === 'Me' ? classes.myText : classes.answer)
 
@@ -35,7 +35,7 @@ let msg = (props) => {
                <Typography variant="caption"> { sender } </Typography>
             </Grid>
             <Grid item >
-               <Typography variant="body1"> { props.sender || (!props.sender && text) ? text : "please whait..."} </Typography>
+               <Typography variant="body1"> { props.sender || (!props.sender) ? text : "please whait..."} </Typography>
             </Grid>
          </Box>
       </Grid>

@@ -1,19 +1,13 @@
 import update  from 'react-addons-update'
-import { ADD_CHAT } from '../actions/chat_actions.js'
-import { SEND_MSG, 
-        SUCCESS_MESSAGES_LOADING,
-        SUCCESS_CHAT_CREATE, 
+// import { ADD_CHAT } from '../actions/chat_actions.js'
+import { SUCCESS_CHAT_CREATE, 
         SUCCESS_CHATS_LOADING, 
         START_CHAT_CREATE, 
         ERROR_CHAT_CREATE  } from '../actions/chat_actions.js';
      
 
 let initialStore = {
-    chats: {
-        // 1: { title: "Support" },
-        // 2: { title: "Darth Vader"},
-        // 3: { title: "Friend"},
-    }, 
+    chatRooms: {}, 
     isLoading: true,
 }
 
@@ -37,10 +31,8 @@ export default function chatReducer(store = initialStore, action) {
         }
         
         case SUCCESS_CHATS_LOADING: {
-            let dto = action.payload
             let chats = {}
-
-            dto.forEach(d => {
+            action.payload.forEach(d => {
                 chats[d._id] = {title: d.title}
             })
 
@@ -48,6 +40,7 @@ export default function chatReducer(store = initialStore, action) {
                 chats: { $set: chats }
             })
         }
+        
         // case ADD_CHAT: {
         //     console.log(store.chats)
         //     // let chatId = Object.keys(store.chats).length + 1;
