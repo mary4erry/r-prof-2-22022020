@@ -24,19 +24,19 @@ import { history } from './store/store.js'
 
 const theme = createMuiTheme({
     palette: {
-        primary: {
-            light: '#00695f',
-            main: '#009688',
-            dark: '#33ab9f',
-        },
-        secondary: {
-          main: '#ffe082',
-        },
-        background: {
-            paper: '#00695f',
-            default: "#fff"
-         }
+      primary: {
+         light: '#00695f',
+         main: '#009688',
+         dark: '#33ab9f',
       },
+      secondary: {
+         main: '#ffe082',
+      },
+      background: {
+         paper: '#00695f',
+         default: "#fff"
+      }
+   },
 })
 
 ReactDom.render (

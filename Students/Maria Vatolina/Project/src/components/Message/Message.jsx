@@ -5,19 +5,19 @@ import { makeStyles } from '@material-ui/core/styles'
 import './style.css';
 
 const useStyles = makeStyles(theme => ({
-    root: {
-       display: 'flex',
-       flexDirection: 'column',
-       color: theme.palette.text.primary,
-    },
-    myText: {
-       alignSelf: 'flex-end',
-       backgroundColor: theme.palette.primary.main,
-    },
-    answer: {
-       alignSelf: 'flex-start',
-       backgroundColor: theme.palette.primary.light,
-    }
+   root: {
+      display: 'flex',
+      flexDirection: 'column',
+      color: theme.palette.text.primary,
+   },
+   myText: {
+      alignSelf: 'flex-end',
+      backgroundColor: theme.palette.primary.main,
+   },
+   answer: {
+      alignSelf: 'flex-start',
+      backgroundColor: theme.palette.primary.light,
+   }
   }))
 
 let msg = (props) => {

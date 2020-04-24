@@ -25,14 +25,16 @@ const useStyles = (theme => ({
       display: 'flex',
       flexDirection: 'column',
       justifyContent: 'flex-end',
-      padding: theme.spacing(2)
+      padding: theme.spacing(2),
+      backgroundColor: theme.palette.background.default,
    },
    sendForm: {
       maxHeight: '60px',
       position: 'static',
       display: 'flex',
       justifyContent: 'space-between',
-      padding: theme.spacing(1, 2, 0, 2)
+      padding: theme.spacing(1, 2, 0, 2),
+      backgroundColor: theme.palette.background.default,
    }
  }))
 
