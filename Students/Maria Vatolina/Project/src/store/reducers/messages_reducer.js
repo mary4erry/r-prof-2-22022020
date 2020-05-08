@@ -5,7 +5,7 @@ import { START_MESSAGES_LOADING,
         } from '../actions/messages_actions.js'
 
 const initialStore = {
-    messages: {},
+    messages: [],
     isLoading: false,
 }
 
@@ -46,7 +46,7 @@ export default function msgReducer(store = initialStore, action) {
             const { _id, chatId, sender, text } = action.payload
             return update(store, {
                 messages: { 
-                    $push: { [_id]: { chatId, sender, text } } 
+                    $merge: { [_id]: { chatId, sender, text } } 
                 }
             })
         }
