@@ -1,0 +1,50 @@
+import React from 'react'
+// import ReactDom from 'react-dom'
+import style from './Navbar.module.css'
+
+import Friend from './FriendsList/FriendsList.jsx'
+
+import { NavLink } from 'react-router-dom'
+
+const Navbar = (props) => {
+   let friendsList = props.state.friends.map(f => {
+      return <Friend 
+               user={f.userName}
+               id={f.id}
+               userpic={f.userpic}/>
+   })
+   return (
+      <nav className={style.navbar}>
+         <div className={style.item}>
+            <NavLink to="/profile" activeClassName={style.active}>
+               Profile
+            </NavLink>
+         </div>
+         <div className={style.item}>
+            <NavLink to="/dialogs" activeClassName={style.active}>
+               Messages
+            </NavLink>
+         </div>
+         <div className={style.item}>
+            <NavLink to="/news" activeClassName={style.active}>
+               News
+            </NavLink>
+         </div>
+         <div className={style.item}>
+            <NavLink to="/profile">Music</NavLink>
+         </div>
+         <div className={style.item}>
+            <NavLink to="/profile">Settings</NavLink>
+         </div>
+         <div className={style.friendsBlock}>
+            <h2>Friends</h2>
+            <div className={style.friendsList}>
+               {friendsList}
+            </div>
+            
+         </div>
+
+      </nav>
+   )
+}
+export default Navbar

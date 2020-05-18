@@ -1,0 +1,10 @@
+.item {
+  margin: 5px
+}
+.item img{
+  width: 30px;
+}
+.friends a {
+  text-decoration: none;
+  /* padding: 10px; */
+}
