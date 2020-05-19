@@ -8,13 +8,15 @@ const InputMessage = (props) => {
    let newMsgElement = React.createRef()
 
    let sendMessage =() => {
-      props.sendMessage()
+      // props.sendMessage()
+      props.dispatch({type: 'SEND_MESSAGE'})
    }
 
    let onMsgChange = () => {
       let msg = newMsgElement.current.value
-      props.updNewMessageText(msg)
-      console.log(msg);
+      // props.updNewMessageText(msg)
+      props.dispatch({ type: 'UPD_NEW_MESSAGE_TEXT', newText: msg})
+      // console.log(msg);
       
    }
 
