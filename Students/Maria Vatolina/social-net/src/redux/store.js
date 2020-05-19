@@ -1,7 +1,6 @@
-const ADD_POST = 'ADD_POST'
-const UPD_NEW_POST_TEXT = 'UPD_NEW_POST_TEXT'
-const SEND_MESSAGE = 'SEND_MESSAGE'
-const UPD_NEW_MESSAGE_TEXT = 'UPD_NEW_MESSAGE_TEXT'
+import profileReducer from "./reducers/profile.reducer"
+import dialogsReducer from "./reducers/dialogs.reducer"
+import navbarReducer from "./reducers/navbar.reducer"
 
 let store = {
    _state: {
@@ -48,72 +47,15 @@ let store = {
    subscribe(observer) {
       this._callSubscriber = observer // pattern observer //publisher-subscriber
    },
-   // sendMessage() {
-   //    let newMessage = {
-   //       id: 6,
-   //       // id: state.dialogsPage.dialogs.msgs.lenght+1,
-   //       text: this._state.dialogsPage.newMsgText,
-   //    }
-   //    this._state.dialogsPage.msgs.push(newMessage)
-   //    this._state.dialogsPage.newMsgText= ''
-   //    this._callSubscriber(this._state)
-   // },
-   // updNewMessageText(newText) {
-   //    this._state.dialogsPage.newMsgText = newText
-   //    this._callSubscriber(this._state)
-   // },
-   // addPost() {
-   //    let newPost = {
-   //       id: 5,
-   //       message: this._state.profilePage.newPostText,
-   //       likesCount: 0,
-   //    }
-   //    this._state.profilePage.posts.push(newPost)
-   //    this._state.profilePage.newPostText = ''
-   //    this._callSubscriber(this._state)
-   // },
-   // updNewPostText(newText) { 
-   //    this._state.profilePage.newPostText = newText
-   //    this._callSubscriber(this._state)
-   // },
-   dispatch(action) { // { type: 'ADD-POST'}
-      switch (action.type) {
-         case ADD_POST: {
-            let newPost = {
-               id: 5,
-               message: this._state.profilePage.newPostText,
-               likesCount: 0,
-            }
-            this._state.profilePage.posts.push(newPost)
-            this._state.profilePage.newPostText = ''
-            this._callSubscriber(this._state)
-         }
-         case UPD_NEW_POST_TEXT: {
-            this._state.profilePage.newPostText = action.newText
-            this._callSubscriber(this._state)
-         }
-         case SEND_MESSAGE: {
-            let newMessage = {
-               id: 6,
-               // id: state.dialogsPage.dialogs.msgs.lenght+1,
-               text: this._state.dialogsPage.newMsgText,
-            }
-            this._state.dialogsPage.msgs.push(newMessage)
-            this._state.dialogsPage.newMsgText= ''
-            this._callSubscriber(this._state)
-         }
-         case UPD_NEW_MESSAGE_TEXT: {
-            this._state.dialogsPage.newMsgText = action.newText
-            this._callSubscriber(this._state)
-         } 
-      }
-   },
-}
+   dispatch(action) {
 
-export const addPostActionCreator = () => ({ type: 'ADD_POST'})
-export const updNewPostTextActionCreator = (text) =>  ({type: 'UPD_NEW_POST_TEXT', newText: text})
-export const sendMessageActionCreator = () => ({ type: 'SEND_MESSAGE'})
-export const onMsgChangeActionCreator = (text) =>  ({type: 'UPD_NEW_MESSAGE_TEXT', newText: text})
+      this._state.profilePage = profileReducer(this._state.profilePage, action)
+      this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action)
+      this._state.navbar = navbarReducer(this._state.navbar, action)
+
+   this._callSubscriber(this._state)
+   }
+}
 
 
 // let rerenderEntireTree = () => {  

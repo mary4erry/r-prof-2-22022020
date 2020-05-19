@@ -6,9 +6,8 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 // import './index.css'
 import App from './App.jsx'
-import {addPost, updNewPostText, sendMessage, updNewMessageText} from './redux/state.js'
-import { Route, BrowserRouter } from 'react-router-dom'
-import store from './redux/state.js'
+import { BrowserRouter } from 'react-router-dom'
+import store from './redux/redux-store.js'
 
 let rerenderEntireTree = (state) => {
    ReactDOM.render(
@@ -28,4 +27,7 @@ let rerenderEntireTree = (state) => {
 
 rerenderEntireTree(store.getState())
 
-store.subscribe(rerenderEntireTree)
+store.subscribe(() => {
+   let state = store.getState()
+   rerenderEntireTree(state)
+})

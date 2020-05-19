@@ -1,5 +1,5 @@
 import React from 'react'
-import { sendMessageActionCreator, onMsgChangeActionCreator } from '../../../redux/state.js'
+import { sendMessageActionCreator, onMsgChangeActionCreator } from '../../../redux/reducers/dialogs.reducer'
 
 // import style from './Dialogs.module.css'
 // import DialogItem from './DialogItem/DialogItem.jsx'
