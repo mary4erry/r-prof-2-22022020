@@ -1,3 +1,8 @@
+const ADD_POST = 'ADD_POST'
+const UPD_NEW_POST_TEXT = 'UPD_NEW_POST_TEXT'
+const SEND_MESSAGE = 'SEND_MESSAGE'
+const UPD_NEW_MESSAGE_TEXT = 'UPD_NEW_MESSAGE_TEXT'
+
 let store = {
    _state: {
       profilePage: {
@@ -37,28 +42,26 @@ let store = {
    _callSubscriber() {   //rerenderEntireTree
       console.log('state changed');
    },
-
    getState() {
       return this._state;
    },
    subscribe(observer) {
       this._callSubscriber = observer // pattern observer //publisher-subscriber
    },
-
-   sendMessage() {
-      let newMessage = {
-         id: 6,
-         // id: state.dialogsPage.dialogs.msgs.lenght+1,
-         text: this._state.dialogsPage.newMsgText,
-      }
-      this._state.dialogsPage.msgs.push(newMessage)
-      this._state.dialogsPage.newMsgText= ''
-      this._callSubscriber(this._state)
-   },
-   updNewMessageText(newText) {
-      this._state.dialogsPage.newMsgText = newText
-      this._callSubscriber(this._state)
-   },
+   // sendMessage() {
+   //    let newMessage = {
+   //       id: 6,
+   //       // id: state.dialogsPage.dialogs.msgs.lenght+1,
+   //       text: this._state.dialogsPage.newMsgText,
+   //    }
+   //    this._state.dialogsPage.msgs.push(newMessage)
+   //    this._state.dialogsPage.newMsgText= ''
+   //    this._callSubscriber(this._state)
+   // },
+   // updNewMessageText(newText) {
+   //    this._state.dialogsPage.newMsgText = newText
+   //    this._callSubscriber(this._state)
+   // },
    // addPost() {
    //    let newPost = {
    //       id: 5,
@@ -74,9 +77,8 @@ let store = {
    //    this._callSubscriber(this._state)
    // },
    dispatch(action) { // { type: 'ADD-POST'}
-      if (action.type ==='ADD_POST') {
-      // switch (action.type) {
-         // case ADD_POST: {
+      switch (action.type) {
+         case ADD_POST: {
             let newPost = {
                id: 5,
                message: this._state.profilePage.newPostText,
@@ -85,14 +87,12 @@ let store = {
             this._state.profilePage.posts.push(newPost)
             this._state.profilePage.newPostText = ''
             this._callSubscriber(this._state)
-      }
-         else if (action.type ==='UPD_NEW_POST_TEXT') {
-         // case UPD_NEW_POST_TEXT: {
+         }
+         case UPD_NEW_POST_TEXT: {
             this._state.profilePage.newPostText = action.newText
             this._callSubscriber(this._state)
          }
-         else if (action.type ==='SEND_MESSAGE') {
-         // case SEND_MESSAGE: {
+         case SEND_MESSAGE: {
             let newMessage = {
                id: 6,
                // id: state.dialogsPage.dialogs.msgs.lenght+1,
@@ -102,17 +102,18 @@ let store = {
             this._state.dialogsPage.newMsgText= ''
             this._callSubscriber(this._state)
          }
-         else if (action.type ==='UPD_NEW_MESSAGE_TEXT') {
-         // case UPD_NEW_MESSAGE_TEXT: {
+         case UPD_NEW_MESSAGE_TEXT: {
             this._state.dialogsPage.newMsgText = action.newText
             this._callSubscriber(this._state)
          } 
-      
-      
-
-      
-   }
+      }
+   },
 }
+
+export const addPostActionCreator = () => ({ type: 'ADD_POST'})
+export const updNewPostTextActionCreator = (text) =>  ({type: 'UPD_NEW_POST_TEXT', newText: text})
+export const sendMessageActionCreator = () => ({ type: 'SEND_MESSAGE'})
+export const onMsgChangeActionCreator = (text) =>  ({type: 'UPD_NEW_MESSAGE_TEXT', newText: text})
 
 
 // let rerenderEntireTree = () => {  
