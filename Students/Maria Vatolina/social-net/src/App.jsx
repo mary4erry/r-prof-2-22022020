@@ -1,13 +1,13 @@
 import React from 'react'
-
-import style from './App.module.css'
-
 import { Route } from 'react-router-dom'
 
+// components
 import Profile from './components/Profile/Profile.jsx'
 import Header from './components/Header/Header.jsx'
 import Navbar from './components/Navbar/Navbar.jsx'
-import Dialogs from './components/Dialogs/Dialogs.jsx'
+import DialogsContainer from './components/Dialogs/DialogsContainer'
+
+import style from './App.module.css'
 
 const App = (props) => {
    
@@ -15,20 +15,22 @@ const App = (props) => {
       <div className={style.container}>
          <div className={style.appWrapper}>
             <Header />
-            <Navbar state={props.state.navbar}/>
+            <Navbar state={props.store}/>
             <div className={style.app_wrapper_content}>
 
                <Route path="/dialogs" 
-                  render={() => <Dialogs 
-                     state={props.state.dialogsPage}
-                     dispatch={props.dispatch}
+                  render={() => <DialogsContainer
+                     store={props.store} 
+                     // state={props.state.dialogsPage}
+                     // dispatch={props.dispatch}
                      // updNewMessageText={props.updNewMessageText}
                   />}
                />
                <Route path="/profile" 
                   render={() => <Profile 
-                     profilePage={props.state.profilePage}
-                     dispatch={props.dispatch}
+                     store={props.store} 
+                     // profilePage={props.state.profilePage}
+                     // dispatch={props.dispatch}
                      // updNewPostText={props.updNewPostText}
                   />} 
                />

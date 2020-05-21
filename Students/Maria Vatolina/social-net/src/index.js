@@ -1,33 +1,31 @@
-
-// import './index.css'
-// import state from './redux/state.js'
-
 import React from 'react'
 import ReactDOM from 'react-dom'
-// import './index.css'
-import App from './App.jsx'
+import { Provider } from "react-redux"; 
 import { BrowserRouter } from 'react-router-dom'
 import store from './redux/redux-store.js'
 
-let rerenderEntireTree = (state) => {
+//components
+import App from './App.jsx'
+
+// let rerenderEntireTree = () => {
    ReactDOM.render(
       <BrowserRouter>
-         <App 
-            // store={store}
-            state={state} 
-            dispatch={store.dispatch.bind(store)} 
-            // updNewPostText={store.updNewPostText.bind(store)}
-            // sendMessage={store.sendMessage.bind(store)}
-            // updNewMessageText={store.updNewMessageText.bind(store)}
+        <Provider store={store}>
+           <App 
+               // state={state} 
+               // dispatch={store.dispatch.bind(store)} 
+               // updNewPostText={store.updNewPostText.bind(store)}
+               // sendMessage={store.sendMessage.bind(store)}
+               // updNewMessageText={store.updNewMessageText.bind(store)}
             />
-      </BrowserRouter>,
-         document.getElementById('root')
+        </Provider>
+      </BrowserRouter>, document.getElementById('root')
    )
-}
+// }
 
-rerenderEntireTree(store.getState())
+// rerenderEntireTree()
 
-store.subscribe(() => {
-   let state = store.getState()
-   rerenderEntireTree(state)
-})
+// store.subscribe(() => {
+//    // let state = store.getState()
+//    rerenderEntireTree()
+// })

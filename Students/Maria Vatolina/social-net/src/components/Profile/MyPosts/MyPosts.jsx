@@ -3,7 +3,7 @@ import React from 'react'
 
 import Post from './Post.jsx'
 import style from './MyPosts.module.css'
-import { addPostActionCreator, updNewPostTextActionCreator } from '../../../redux/reducers/profile.reducer'
+// import { addPostActionCreator, updNewPostTextActionCreator } from '../../../redux/reducers/profile.reducer'
 
 const MyPosts = (props) => {
    
@@ -16,18 +16,16 @@ const MyPosts = (props) => {
 
    let newPostElement = React.createRef()
 
-   let addPost = () => {
-      // props.addPost()
-      props.dispatch( addPostActionCreator() )
+   let onAddPost = () => {
+      props.addPost()
+      // props.dispatch( addPostActionCreator() )
    }
 
    let onPostChange = () => {
       let text = newPostElement.current.value
-      // props.updNewPostText(text)
+      props.updNewPostText(text)
       // let action = {type: 'UPD_NEW_POST_TEXT', newText: text}
-      props.dispatch(updNewPostTextActionCreator(text))
-      // console.log(text);
-      
+      // props.dispatch(updNewPostTextActionCreator(text))  
    }
 
    return (
@@ -45,7 +43,7 @@ const MyPosts = (props) => {
                   rows="2"/>
             </div>
             <div>
-               <button onClick={ addPost }>Add post</button>
+               <button onClick={ onAddPost }>Add post</button>
             </div>
          </div>
          <div className={style.post}>

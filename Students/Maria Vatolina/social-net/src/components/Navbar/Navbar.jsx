@@ -7,12 +7,14 @@ import Friend from './FriendsList/FriendsList.jsx'
 import { NavLink } from 'react-router-dom'
 
 const Navbar = (props) => {
-   let friendsList = props.state.friends.map(f => {
-      return <Friend 
-               user={f.userName}
-               id={f.id}
-               userpic={f.userpic}/>
-   })
+   // debugger
+   // let state = props.navbar
+   // let friendsList = state.friends.map (f => 
+   //    <Friend 
+   //       user={f.userName}
+   //       id={f.id}
+   //       userpic={f.userpic}/>
+   // )
    return (
       <nav className={style.navbar}>
          <div className={style.item}>
@@ -39,7 +41,7 @@ const Navbar = (props) => {
          <div className={style.friendsBlock}>
             <h2>Friends</h2>
             <div className={style.friendsList}>
-               {friendsList}
+               {/* {friendsList} */}
             </div>
             
          </div>
