@@ -11,10 +11,13 @@ const Post = (props) => {
             src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcS4bkPT14o4_n_lnU-3DNyZol1LE0vParolHN-kXQTD8exgO4-8&usqp=CAU"
             alt=""
          />
-         <div>{props.message}</div>
+         <div className={style.item_body}>
+            <div>{props.message}</div>
          <div>
             <span>likes {props.likesCount}</span>
          </div>
+         </div>
+         
       </div>
    )
 }

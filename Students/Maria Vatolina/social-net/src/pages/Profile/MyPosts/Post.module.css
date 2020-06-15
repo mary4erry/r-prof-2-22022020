@@ -1,0 +1,11 @@
+.item {
+   display: flex;
+   flex-direction: row;
+   padding: 10px;
+   &_body {
+      flex-direction: column;
+   }
+}
+.item img {
+   border-radius: 50%;
+}
