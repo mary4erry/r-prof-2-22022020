@@ -26,7 +26,7 @@ const App = (props) => {
                   render={() => <Profile />}
                />
                <Route path="/users"
-                  render={ () => <UsersContainer /> }
+                  render={() => <UsersContainer /> }
                />
                {/* <Route path="/news" component={Profile} />
                <Route path="/music" component={Profile} />
