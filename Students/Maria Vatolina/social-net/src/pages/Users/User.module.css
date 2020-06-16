@@ -8,3 +8,10 @@
 .selectedPage {
    font-weight: bold;
 }
+.pageNum {
+   margin: 2px;
+   cursor: pointer;
+}
+.pageNum:hover {
+   text-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}

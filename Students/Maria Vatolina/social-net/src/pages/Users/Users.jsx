@@ -9,6 +9,7 @@ class Users extends React.Component {
       axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
          .then(response => {
             this.props.setUsers(response.data.items)
+            this.props.setTotalUsersCount(response.data.totalCount)
          })
    }
 
@@ -34,7 +35,7 @@ class Users extends React.Component {
          <div>
          { pages.map( p => 
             <span 
-               className={this.props.currentPage === p ? style.selectedPage : undefined} key={p}
+               className={this.props.currentPage === p ? style.selectedPage : style.pageNum} key={p}
                onClick={() => { this.onPageChanged(p)}}>{p}
             </span>
          )}
