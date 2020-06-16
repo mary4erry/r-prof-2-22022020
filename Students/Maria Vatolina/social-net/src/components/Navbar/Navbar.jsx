@@ -33,10 +33,15 @@ const Navbar = (props) => {
             </NavLink>
          </div>
          <div className={style.item}>
-            <NavLink to="/profile">Music</NavLink>
+            <NavLink to="/*" activeClassName={style.active}>Music</NavLink>
          </div>
          <div className={style.item}>
-            <NavLink to="/profile">Settings</NavLink>
+            <NavLink to="/**" activeClassName={style.active}>Settings</NavLink>
+         </div>
+         <div className={style.item}>
+            <NavLink to="/users" activeClassName={style.active}>
+               Users
+            </NavLink>
          </div>
          <div className={style.friendsBlock}>
             <h2>Friends</h2>
