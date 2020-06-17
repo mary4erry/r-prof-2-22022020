@@ -3,10 +3,10 @@ import Users from './Users.jsx'
 import Loader from '../../controls/Loader/Loader.jsx'
 import * as axios from 'axios'
 import { connect } from 'react-redux'
-import { followAC, unfollowAC, setUsersAC, 
-         setCurrentPageAC, 
-         setTotalUsersCountAC, 
-         toggleIsLoadingAC} from '../../redux/reducers/users.reducer'
+import { follow, unfollow, setUsers, 
+         setCurrentPage, 
+         setTotalUsersCount, 
+         toggleIsLoading} from '../../redux/reducers/users.reducer'
 
 class UsersContainer extends React.Component {
 
@@ -56,26 +56,16 @@ let mapStateToProps = (state) => {
       isLoading: state.usersPage.isLoading,
    }
 }
-let mapDispatchToProps = (dispatch) => {
-   return {
-      follow: (userId) => {
-         dispatch(followAC(userId))
-      },
-      unfollow: (userId) => {
-         dispatch(unfollowAC(userId))
-      },
-      setUsers: (users) => {
-         dispatch(setUsersAC(users))
-      },
-      setCurrentPage: (pageNumber) => {
-         dispatch(setCurrentPageAC(pageNumber))
-      },
-      setTotalUsersCount: (totalCount) => {
-         dispatch(setTotalUsersCountAC(totalCount))
-      },
-      toggleIsLoading: (isLoading) => {
-         dispatch(toggleIsLoadingAC(isLoading))
-      }
-   }
-}
-export default connect(mapStateToProps, mapDispatchToProps) (UsersContainer)
+// let mapDispatchToProps = (dispatch) => {
+//    return {
+//       follow: followAC,
+//       unfollow: unfollowAC,
+//       setUsers: setUsersAC,
+//       setCurrentPage: setCurrentPageAC,
+//       setTotalUsersCount: setTotalUsersCountAC,
+//       toggleIsLoading: toggleIsLoadingAC,
+//    }
+// }
+export default connect (mapStateToProps,  {
+   follow, unfollow, setUsers, setCurrentPage, setTotalUsersCount, toggleIsLoading
+}) (UsersContainer)
