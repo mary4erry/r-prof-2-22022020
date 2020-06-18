@@ -25,7 +25,6 @@ const ProfileInfo = (props) => {
             
             {props.profile.lookingForAJob 
                && <div> Рассмотрю предложения о работе: {props.profile.lookingForAJobDescription}</div>}
-            
             <div>
                Contacts: 
                {/* {props.profile.contacts.map( c => 

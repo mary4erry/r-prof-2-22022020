@@ -9,7 +9,7 @@ let initialState = {
       { id: 3, message: 'About javaScript ', likesCount: 3 },
       { id: 4, message: 'Learn React', likesCount: 234 },
    ],
-   newPostText: 'write please',
+   newPostText: '',
    profile: null,
 }
 
@@ -42,8 +42,8 @@ const profileReducer = (state = initialState, action) => {
    }
 }
 
-export const addPostActionCreator = () => ({ type: 'ADD_POST'})
-export const updNewPostTextActionCreator = (text) =>  ({type: 'UPD_NEW_POST_TEXT', newText: text})
+export const addPost = () => ({ type: 'ADD_POST'})
+export const updNewPostText= (text) =>  ({type: 'UPD_NEW_POST_TEXT', newText: text})
 export const setUserProfile = (profile) =>  ({type: 'SET_USER_PROFILE', profile})
 
 export default profileReducer
