@@ -32,7 +32,6 @@ const ProfileInfo = (props) => {
                )} */}
                {/* {props.profile.contacts.github} */}
             </div>
-            ava + description
          </div>
       </div>
    )
