@@ -2,8 +2,13 @@ import React from 'react'
 // import ReactDom from 'react-dom'
 
 import style from './ProfileInfo.module.css'
+import Loader from '../../../controls/Loader/Loader'
 
-const ProfileInfo = () => {
+const ProfileInfo = (props) => {
+   if (!props.profile) {
+      return <Loader />
+   }
+   // let contacts = 
    return (
       <div>
          <div className={style.bgPhoto}>
@@ -12,7 +17,24 @@ const ProfileInfo = () => {
                alt=""
             />
          </div>
-         <div className={style.description}>ava + description</div>
+         <div className={style.description}>
+            <img className={style.ava_big} src={props.profile.photos.large} alt=""/>
+            <div> {props.profile.fullName} </div>
+            {props.profile.aboutMe 
+               && <div> О себе: {props.profile.aboutMe} </div>}
+            
+            {props.profile.lookingForAJob 
+               && <div> Рассмотрю предложения о работе: {props.profile.lookingForAJobDescription}</div>}
+            
+            <div>
+               Contacts: 
+               {/* {props.profile.contacts.map( c => 
+                  <span>{c}</span>
+               )} */}
+               {/* {props.profile.contacts.github} */}
+            </div>
+            ava + description
+         </div>
       </div>
    )
 }

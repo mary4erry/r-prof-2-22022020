@@ -2,13 +2,13 @@ import React from 'react'
 import { Route } from 'react-router-dom'
 
 // components
-import Profile from './pages/Profile/Profile.jsx'
 import Header from './components/Header/Header.jsx'
 import Navbar from './components/Navbar/Navbar.jsx'
 import DialogsContainer from './pages/Dialogs/DialogsContainer'
 import UsersContainer from './pages/Users/UsersContainer.jsx'
 
 import style from './App.module.css'
+import ProfileContainer from './pages/Profile/ProfileContainer.jsx'
 
 const App = (props) => {
    
@@ -23,7 +23,7 @@ const App = (props) => {
                   render={() => <DialogsContainer />}
                />
                <Route path="/profile" 
-                  render={() => <Profile />}
+                  render={() => <ProfileContainer />}
                />
                <Route path="/users"
                   render={() => <UsersContainer /> }
