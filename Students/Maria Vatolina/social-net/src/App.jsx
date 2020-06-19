@@ -9,13 +9,14 @@ import UsersContainer from './pages/Users/UsersContainer.jsx'
 
 import style from './App.module.css'
 import ProfileContainer from './pages/Profile/ProfileContainer.jsx'
+import HeaderContainer from './components/Header/HeaderContainer.jsx'
 
 const App = (props) => {
    
    return (
       <div className={style.container}>
          <div className={style.appWrapper}>
-            <Header />
+            <HeaderContainer />
             <Navbar state={props.store}/>
             <div className={style.app_wrapper_content}>
 

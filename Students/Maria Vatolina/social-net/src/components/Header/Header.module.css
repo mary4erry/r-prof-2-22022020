@@ -4,7 +4,15 @@
   /* border-radius: 20px; */
   
  }
- .header img {
+.header img {
   padding: 5px;
-   width: 50px;
- }
+  width: 50px;
+}
+.loginBlock {
+  float: right;
+  text-align: center;
+}
+.loginBlock a {
+  text-decoration: none;
+  color: aliceblue;
+}
