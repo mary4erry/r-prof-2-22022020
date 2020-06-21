@@ -1,17 +1,40 @@
 .wrap {
-   display: grid;
-   
+   margin: 30px;
+}
+.pages {
+   margin-bottom: 20px;
+   font-size: 18px;
+}
+.userItem {
+   display: flex;
+   flex-direction: row;
+   align-items: center;
+}
+.userInfo {
+   font-size: 18px;
+   margin-left: 20px;
+}
+.userInfo_name {
+   font-weight: bold;
+   font-size: 20px;
 }
 .photoUrl {
-   width: 50px
+   width: 70px;
+   margin-bottom: 7px;
 }
 .selectedPage {
    font-weight: bold;
 }
 .pageNum {
+   color: rgba(0, 0, 0, 0.5);
    margin: 2px;
    cursor: pointer;
 }
 .pageNum:hover {
    text-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+.button_follow {
+   margin-left: 20px;
+   
+
 }

@@ -6,7 +6,8 @@ import { connect } from 'react-redux'
 import { follow, unfollow, setUsers, 
          setCurrentPage, 
          setTotalUsersCount, 
-         toggleIsLoading} from '../../redux/reducers/users.reducer'
+         toggleIsLoading,
+         toggleFollowingProgress, } from '../../redux/reducers/users.reducer'
 
 class UsersContainer extends React.Component {
 
@@ -44,6 +45,8 @@ class UsersContainer extends React.Component {
                   users= {this.props.users}
                   unfollow= {this.props.unfollow}
                   follow= {this.props.follow}
+                  toggleFollowingProgress={this.props.toggleFollowingProgress}
+                  followingInProgress={this.props.followingInProgress}
                /> 
             </>
    }
@@ -56,6 +59,8 @@ let mapStateToProps = (state) => {
       totalUsersCount: state.usersPage.totalUsersCount,
       currentPage: state.usersPage.currentPage,
       isLoading: state.usersPage.isLoading,
+      followingInProgress: state.usersPage.followingInProgress,
+
    }
 }
 // let mapDispatchToProps = (dispatch) => {
@@ -69,5 +74,4 @@ let mapStateToProps = (state) => {
 //    }
 // }
 export default connect (mapStateToProps,  {
-   follow, unfollow, setUsers, setCurrentPage, setTotalUsersCount, toggleIsLoading
-}) (UsersContainer)
+   follow, unfollow, setUsers, setCurrentPage, setTotalUsersCount, toggleIsLoading, toggleFollowingProgress }) (UsersContainer)

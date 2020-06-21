@@ -3,7 +3,7 @@
   margin: 0;
 }
 .container {
-  width: 100vW;
+  /* width: 1400px; */
   
 }
 .appWrapper {
@@ -13,7 +13,7 @@
   "nav cont";
   grid-template-rows: 60px 1fr;
   grid-template-columns: 2fr 10fr;
-  /* width: 1200px; */
+  width: 1200px;
   margin: 0 auto;
 }
 
