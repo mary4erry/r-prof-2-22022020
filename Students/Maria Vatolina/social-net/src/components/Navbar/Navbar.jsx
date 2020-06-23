@@ -2,7 +2,7 @@ import React from 'react'
 // import ReactDom from 'react-dom'
 import style from './Navbar.module.css'
 
-import Friend from './FriendsList/FriendsList.jsx'
+// import Friend from './FriendsList/FriendsList.jsx'
 
 import { NavLink } from 'react-router-dom'
 

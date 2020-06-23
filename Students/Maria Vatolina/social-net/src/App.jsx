@@ -2,7 +2,6 @@ import React from 'react'
 import { Route } from 'react-router-dom'
 
 // components
-import Header from './components/Header/Header.jsx'
 import Navbar from './components/Navbar/Navbar.jsx'
 import DialogsContainer from './pages/Dialogs/DialogsContainer'
 import UsersContainer from './pages/Users/UsersContainer.jsx'
