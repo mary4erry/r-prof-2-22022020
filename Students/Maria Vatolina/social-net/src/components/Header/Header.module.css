@@ -2,7 +2,7 @@
   grid-area: header;
   background-color: rgb(144, 214, 216);
   /* border-radius: 20px; */
-  
+
  }
 .header img {
   padding: 5px;
@@ -10,9 +10,11 @@
 }
 .loginBlock {
   float: right;
-  text-align: center;
+  align-items: center;
+  margin-right: 30px;
 }
 .loginBlock a {
   text-decoration: none;
   color: aliceblue;
+  line-height: 60px;
 }
