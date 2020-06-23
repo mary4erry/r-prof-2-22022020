@@ -8,7 +8,7 @@ const ProfileInfo = (props) => {
    if (!props.profile) {
       return <Loader />
    }
-   // let contacts = 
+   
    return (
       <div>
          <div className={style.bgPhoto}>
