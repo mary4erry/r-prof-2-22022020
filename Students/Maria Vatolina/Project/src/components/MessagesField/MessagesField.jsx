@@ -1,24 +1,31 @@
-import React, {Component} from 'react';
-import ReactDom from 'react-dom';
+import React, { Component } from 'react'
+import ReactDom from 'react-dom'
 import PropTypes from 'prop-types'
 
-import './style.css';
+import './style.css'
 import { Input, IconButton, Box, CircularProgress } from '@material-ui/core'
-import { Send, SentimentVerySatisfiedRounded, AttachmentRounded } from '@material-ui/icons'
+import {
+   Send,
+   SentimentVerySatisfiedRounded,
+   AttachmentRounded,
+} from '@material-ui/icons'
 import { withStyles } from '@material-ui/core/styles'
 
 import Message from '../Message/Message.jsx'
 
 //ACTIONS
-import { sendMessage, loadMessages } from '../../store/actions/messages_actions.js'
+import {
+   sendMessage,
+   loadMessages,
+} from '../../store/actions/messages_actions.js'
 
 //redux
 import { bindActionCreators } from 'redux'
 import connect from 'react-redux/es/connect/connect'
 
-const useStyles = (theme => ({
+const useStyles = (theme) => ({
    msgList: {
-      overflow: 'auto'
+      overflow: 'auto',
    },
    msgBlock: {
       height: 'calc(100vh - 163px)',
@@ -35,53 +42,53 @@ const useStyles = (theme => ({
       justifyContent: 'space-between',
       padding: theme.spacing(1, 2, 0, 2),
       backgroundColor: theme.palette.background.default,
-   }
- }))
+   },
+})
 
 class Messages extends Component {
-   mesagesRef= React.createRef()
+   mesagesRef = React.createRef()
    constructor(props) {
       super(props)
       this.state = {
          usr: 'Me',
          msg: '',
-      }   
+      }
    }
    static propTypes = {
       isLoading: PropTypes.bool.isRequired,
-   }     
+   }
 
    // handleSendMessage = (sender, text, chatId) => {
    //    this.props.sendMessage(sender, text, chatId)
    // }
 
-   sendMsg = ( sender, text) => {
+   sendMsg = (sender, text) => {
       let { chatId, sendMessage } = this.props
       sendMessage(chatId, sender, text)
    }
 
    handleSendMessage = (sender, text) => {
-      this.setState({ msg: ''})
-      if (text.length > 0) this.sendMsg( sender, text)
+      this.setState({ msg: '' })
+      if (text.length > 0) this.sendMsg(sender, text)
    }
 
    handleChange = (event) => {
-         if (event.keyCode !== 13 ) {
-           this.setState({ msg: event.target.value })           
-         } 
-         // else {
-         //    this.sendMsg(this.state.msg, this.state.usr)
-         //    this.setState({ msg: ''})
-         // }
+      if (event.keyCode !== 13) {
+         this.setState({ msg: event.target.value })
+      }
+      // else {
+      //    this.sendMsg(this.state.msg, this.state.usr)
+      //    this.setState({ msg: ''})
+      // }
    }
 
    componentDidMount() {
-      this.props.loadMessages();
+      this.props.loadMessages()
    }
    // componentDidUpdate (prevProps) {
    //    const { messages, chatId } = this.props;
    //    let chatMessages = messages[chatId]
-   //    if (Object.keys(prevProps.messages).length < Object.keys(chatMessages).length && 
+   //    if (Object.keys(prevProps.messages).length < Object.keys(chatMessages).length &&
    //    chatMessages[Object.keys(chatMessages).length].user === this.state.usr) {
    //       setTimeout(() => {
    //       this.sendMsg('Please, wait...');
@@ -90,7 +97,9 @@ class Messages extends Component {
    // }
 
    scrollToBottom = () => {
-      this.mesagesRef.current.lastElementChild.scrollIntoView({ behavior: 'smooth' })
+      this.mesagesRef.current.lastElementChild.scrollIntoView({
+         behavior: 'smooth',
+      })
    }
 
    render() {
@@ -103,45 +112,54 @@ class Messages extends Component {
 
       let MessagesArr = []
 
-      Object.keys(messages).forEach(messageId => {
-         MessagesArr.push( 
-            <Message 
-            sender={ messages[messageId].user } 
-            text={ messages[messageId].text } 
-            key={ messageId }
-            chatId={ chatId }
-            chats={ chats }
-         />)
+      Object.keys(messages).forEach((messageId) => {
+         MessagesArr.push(
+            <Message
+               sender={messages[messageId].user}
+               text={messages[messageId].text}
+               key={messageId}
+               chatId={chatId}
+               chats={chats}
+            />
+         )
       })
 
       return (
-         <div  className={classes.root}>
-         
-         <Box className={classes.msgBlock}>
-            <Box className={classes.msgList} ref={this.mesagesRef}>
-               { MessagesArr }
+         <div className={classes.root}>
+            <Box className={classes.msgBlock}>
+               <Box className={classes.msgList} ref={this.mesagesRef}>
+                  {MessagesArr}
+               </Box>
             </Box>
-         </Box>
-         <Box className={classes.sendForm} p={2}>
-            <Box width="85%" mr={2}>
-               <Input placeholder="Enter your message..."
-                  fullWidth={ true }
-                  onChange={ this.handleChange }  
-                  onKeyUp={ this.handleChange }
-                  value={ this.state.msg }/>
+            <Box className={classes.sendForm} p={2}>
+               <Box width="85%" mr={2}>
+                  <Input
+                     placeholder="Enter your message..."
+                     fullWidth={true}
+                     onChange={this.handleChange}
+                     onKeyUp={this.handleChange}
+                     value={this.state.msg}
+                  />
+               </Box>
+               <IconButton
+                  aria-label="send"
+                  onClick={() =>
+                     this.handleSendMessage(this.state.usr, this.state.msg, 1)
+                  }
+               >
+                  <Send />
+               </IconButton>
+               <IconButton aria-label="smile">
+                  <SentimentVerySatisfiedRounded />
+               </IconButton>
+               <IconButton aria-label="attachment">
+                  <AttachmentRounded />
+               </IconButton>
             </Box>
-            <IconButton aria-label="send" onClick={ () => this.handleSendMessage( this.state.usr, this.state.msg, 1 ) }>
-               <Send />
-            </IconButton>
-            <IconButton aria-label="smile">
-               <SentimentVerySatisfiedRounded />
-            </IconButton>
-            <IconButton aria-label="attachment" >
-               <AttachmentRounded />
-            </IconButton>
-         </Box>
-
-      </div>
+            <div className={style.block}>
+               <Block />
+            </div>
+         </div>
       )
    }
 }
@@ -151,6 +169,10 @@ const mapStateToProps = ({ msgReducer }) => ({
    // chats: chatReducer.chats,
    isLoading: msgReducer.isLoading,
 })
-const mapDispatchToProps = dispatch => bindActionCreators({ sendMessage, loadMessages }, dispatch)
+const mapDispatchToProps = (dispatch) =>
+   bindActionCreators({ sendMessage, loadMessages }, dispatch)
 
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(useStyles)(Messages))
+export default connect(
+   mapStateToProps,
+   mapDispatchToProps
+)(withStyles(useStyles)(Messages))
