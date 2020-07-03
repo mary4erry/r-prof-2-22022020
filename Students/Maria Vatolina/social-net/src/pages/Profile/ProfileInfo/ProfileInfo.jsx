@@ -3,6 +3,7 @@ import React from 'react'
 
 import style from './ProfileInfo.module.css'
 import Loader from '../../../controls/Loader/Loader'
+import ProfileStatus from './ProfileStatus'
 
 const ProfileInfo = (props) => {
    if (!props.profile) {
@@ -11,14 +12,15 @@ const ProfileInfo = (props) => {
    
    return (
       <div>
-         <div className={style.bgPhoto}>
+         {/* <div className={style.bgPhoto}>
             <img
                src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTueDqN7PI3oDcOWB2Y-RB-7CViMGHY9WurWemhCStStiFAhtVv&usqp=CAU"
                alt=""
             />
-         </div>
+         </div> */}
          <div className={style.description}>
             <img className={style.ava_big} src={props.profile.photos.large} alt=""/>
+            <ProfileStatus status={'hello, my friends!'}/>
             <div> {props.profile.fullName} </div>
             {props.profile.aboutMe 
                && <div> О себе: {props.profile.aboutMe} </div>}
