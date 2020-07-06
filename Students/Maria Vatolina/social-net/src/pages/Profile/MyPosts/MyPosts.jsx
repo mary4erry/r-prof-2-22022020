@@ -1,51 +1,41 @@
 import React from 'react'
-// import ReactDom from 'react-dom'
+import { Field, reduxForm } from 'redux-form'
 
 import Post from './Post.jsx'
 import style from './MyPosts.module.css'
-// import { addPostActionCreator, updNewPostTextActionCreator } from '../../../redux/reducers/profile.reducer'
+
+const AddPostForm = (props) => {
+   return (
+      <form onSubmit={props.handleSubmit}>
+         <div>
+            <Field
+               component='textarea'
+               name='newPostText'/>
+         </div>
+         <div>
+            <button>Add post</button>
+         </div>
+      </form>
+   )
+}
+
+const PostsReduxForm = reduxForm({ form: 'addPostForm' })(AddPostForm)
 
 const MyPosts = (props) => {
-   
-   let postItems = props.posts.map( 
-      p => <Post
-               message={p.message}
-               likesCount={p.likesCount}
-               id={p.id} key={p.id}/>
+
+   let postItems = props.posts.map( p => 
+      <Post
+         message={p.message}
+         likesCount={p.likesCount}
+         id={p.id} key={p.id}/>
    )
-
-   let newPostElement = React.createRef()
-
-   let onAddPost = () => {
-      props.addPost()
-      // props.dispatch( addPostActionCreator() )
+   const onAddPost = (data) => {
+      props.addPost(data.newPostText);
    }
-
-   let onPostChange = () => {
-      let text = newPostElement.current.value
-      props.updNewPostText(text)
-      // let action = {type: 'UPD_NEW_POST_TEXT', newText: text}
-      // props.dispatch(updNewPostTextActionCreator(text))  
-   }
-
    return (
       <div className={style.posts_block}>
          <h3>My posts</h3>
-         <div>
-            <div>
-               <textarea
-                  onChange={onPostChange} 
-                  value={props.newPostText}
-                  name="post" 
-                  ref={newPostElement}
-                  id="new-post" 
-                  cols="30" 
-                  rows="2"/>
-            </div>
-            <div>
-               <button onClick={ onAddPost }>Add post</button>
-            </div>
-         </div>
+         <PostsReduxForm onSubmit={onAddPost}/>
          <div className={style.post}>
             {postItems}
          </div>

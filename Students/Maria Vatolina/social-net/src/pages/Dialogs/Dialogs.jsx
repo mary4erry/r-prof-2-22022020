@@ -3,32 +3,45 @@ import DialogItem from './DialogItem/DialogItem.jsx'
 import style from './Dialogs.module.css'
 import Message from './Message/Message.jsx'
 import { Redirect } from 'react-router-dom'
+import { Field, reduxForm } from 'redux-form'
 
+const AddMessageForm = (props) => {
+   return (
+      <form onSubmit={props.handleSubmit}>
+         <Field
+            className={style.message_form}
+            name='newMsgText'
+            component='textarea'
+            placeholder="Enter your message..."
+         />
+         <div>
+            <button> Send message</button>
+         </div>
+      </form>
+   )
+}
+
+const AddMessageReduxForm = reduxForm({ form: 'dialogAddMessageForm' })(AddMessageForm)
 
 const Dialogs = (props) => {
    let state = props.dialogsPage
 
    let dialogsElements = state.dialogs.map(dialog => 
-   <DialogItem 
-      user={dialog.userName} 
-      id={dialog.id} 
-      key={dialog.id}
-      userpic={dialog.userpic}/>)
+      <DialogItem 
+         user={dialog.userName} 
+         id={dialog.id} 
+         key={dialog.id}
+         userpic={dialog.userpic}/>
+   )
 
    let msgElements = state.msgs.map(msg => 
-   <Message 
-      text={msg.text} 
-      id={msg.id} key={msg.id}/>)
+      <Message 
+         text={msg.text} 
+         id={msg.id} key={msg.id}/>
+   )            
 
-   let newMsgText = state.newMsgText
-            
-   let onSendMessageClick =() => {
-      props.sendMessage()
-   }
-
-   let onMsgChange = (e) => {
-      let body = e.target.value
-      props.updNewMessageText(body)
+   const addNewMessage = (data) => {
+      props.sendMessage(data.newMsgText);
    }
 
    if (!props.isAuth) return <Redirect to={'/login'}/>
@@ -42,22 +55,7 @@ const Dialogs = (props) => {
          <div className={style.messages}>
 
             {msgElements}
-
-            <div>
-               <textarea
-                  onChange={onMsgChange} 
-                  value={newMsgText}
-                  name="post" 
-                  placeholder="Enter your message..."
-                  id="new-post" 
-                  cols="70" 
-                  rows="2"/>
-               <div>
-                  <button 
-                  onClick={ onSendMessageClick }
-                  >Send message</button>
-               </div>
-            </div>
+            <AddMessageReduxForm onSubmit={addNewMessage}/>
          </div>
       </div>
    )
