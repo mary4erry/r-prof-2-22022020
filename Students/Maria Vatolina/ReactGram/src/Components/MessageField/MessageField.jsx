@@ -9,6 +9,7 @@ class MessageField extends React.Component {
    constructor(props) {
       super(props);
       this.state = { 
+         msg: '',
          messages: [
             {user: 'Luke', text: 'Hello'},
             {user: null, text: null},
@@ -17,13 +18,17 @@ class MessageField extends React.Component {
          count: 0,
       }
    }
-   handleChange = () => {
-
+   handleChange = (evt) => {
+      evt.keyCode !== 13 ?
+         this.setState({msg: evt.target.value}) : 
+         this.sendMessage(evt)
    }
-   sendMessage = () => {
-      
-      this.setState({'messages': [...this.state.messages, { user: this.props.usr, text: 'Nooooo'}]})
-      console.log('Message sent')
+   sendMessage = (evt) => {
+      this.setState({ 
+         messages: [...this.state.messages, { user: this.props.usr, text: this.state.msg}],
+         msg: ''
+      })
+      evt.target.value = ''
    }
    render() {
       const { usr } = this.props
@@ -34,12 +39,14 @@ class MessageField extends React.Component {
    )
       return (
          <div>
-            <p>Hello {usr} !</p>
-            <div>{MessagesArr}</div>
+            <p>Hello { usr } !</p>
+            <div>{ MessagesArr }</div>
             <div>
-               <input type="text"/>
+               <input type="text" 
+                  onChange={this.handleChange}
+                  onKeyUp={this.handleChange}/>
                <button
-               onClick={this.sendMessage}>
+                  onClick={this.sendMessage}>
                Send
             </button>
             </div>
