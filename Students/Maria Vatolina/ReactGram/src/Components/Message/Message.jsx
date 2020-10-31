@@ -9,7 +9,7 @@ const Message = (props) => {
 
    return <div className='msg'>
       <strong> { sender }: </strong>
-      <p>{ props.sender ? text : 'go away...' }</p>
+      <p>{ props.sender || (!props.sender && text) ? text : 'go away...' }</p>
    </div> 
 }
 export default Message
