@@ -9,7 +9,7 @@ export default class MessageField extends React.Component {
    constructor(props) {
       super(props)
       this.state = { 
-         msg: '',
+         input: '',
          messages: [{
                user: 'Me',
                text: 'Hello'
@@ -38,7 +38,7 @@ export default class MessageField extends React.Component {
                   user: null,
                   text: 'ask me later...'
                }],
-               msg: ''
+               input: ''
             })
          }, 500)
       }
@@ -46,7 +46,7 @@ export default class MessageField extends React.Component {
    handleChange = (evt) => {
       evt.keyCode !== 13 ?
          this.setState({
-            msg: evt.target.value
+            input: evt.target.value
          }) :
          this.sendMessage(evt)
    }
@@ -54,9 +54,9 @@ export default class MessageField extends React.Component {
       this.setState({
          messages: [...this.state.messages, {
             user: this.props.usr,
-            text: this.state.msg
+            text: this.state.input
          }],
-         msg: ''
+         input: ''
       })
       // evt.target.value = ''
    }
@@ -67,16 +67,24 @@ export default class MessageField extends React.Component {
       const MessagesArr = messages.map(
          message => <Message sender = { message.user } text = { message.text }/>
       )
-      return ( <div>
+      return ( 
+      <div className='layout'>
          <p> Hello { usr }! </p> 
-         <div> { MessagesArr } 
+         <div className='messageField'> 
+            { MessagesArr } 
          </div> 
-         <div>
-            <input type="text"
-               onChange = { this.handleChange }
-               onKeyUp = { this.handleChange }
-               value = { this.state.msg } /> 
-            <button onClick = {this.sendMessage}>
+         <div className={'control'}>
+            <div className={'msgInput-wrapper'} >
+               <input className={'msgInput'} type='text' 
+                  name='input'
+                  onChange = { this.handleChange }
+                  onKeyUp = { this.handleChange }
+                  value = { this.state.input } 
+               /> 
+            </div>
+            
+            <button className={'msgSendBtn'} 
+               onClick = {this.sendMessage} >
                Send 
             </button> 
          </div> 

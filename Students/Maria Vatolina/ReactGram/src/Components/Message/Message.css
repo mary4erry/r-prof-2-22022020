@@ -1,0 +1,14 @@
+.msg {
+   /* width: 40%; */
+   background-color: lightblue;
+   padding: 5px;
+   border-radius: 10px;
+   font-size: 18px;
+   margin: 5px;
+}
+.msgSender{
+   color: lightslategray;
+}
+.msgText{
+   margin: 5px;
+}
