@@ -8,6 +8,7 @@ import Message from '../Message/Message.jsx'
 export default class MessageField extends React.Component {
    constructor(props) {
       super(props)
+      this.textInput = React.createRef();
       this.state = { 
          input: '',
          messages: [{
@@ -29,6 +30,10 @@ export default class MessageField extends React.Component {
          ],
          count: 0,
       }
+   }
+   componentDidMount() {
+      this.textInput.current.focus()
+
    }
    componentDidUpdate() {
       if (this.state.messages[this.state.messages.length - 1].user === 'Me') {
@@ -80,6 +85,7 @@ export default class MessageField extends React.Component {
                   onChange = { this.handleChange }
                   onKeyUp = { this.handleChange }
                   value = { this.state.input } 
+                  ref={this.textInput}
                /> 
             </div>
             
