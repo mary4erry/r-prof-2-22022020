@@ -2,10 +2,8 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 
 import style from './MessageField.css'
-import { TextField, FloatingActionButton } from 'material-ui';
-import SendIcon from 'material-ui/svg-icons/content/send';
-
 import Message from '../Message/Message.jsx'
+
 
 export default class MessageField extends React.Component {
    constructor(props) {
@@ -65,26 +63,24 @@ export default class MessageField extends React.Component {
          }],
          input: ''
       })
+      // evt.target.value = ''
    }
    render() {
-      // const { usr } = this.props
+      const { usr } = this.props
       const { messages } = this.state
 
       const MessagesArr = messages.map(
          message => <Message sender = { message.user } text = { message.text }/>
       )
       return ( 
-      <div className='root'>
-         <p> Chat with user</p> 
+      <div className='layout'>
+         <p> Hello { usr }! </p> 
          <div className='messageField'> 
             { MessagesArr } 
          </div> 
          <div className={'control'}>
             <div className={'msgInput-wrapper'} >
-               <TextField 
-                  className={'msgInput'} 
-                  fullWidth
-                  type='text' 
+               <input className={'msgInput'} type='text' 
                   name='input'
                   onChange = { this.handleChange }
                   onKeyUp = { this.handleChange }
@@ -93,10 +89,10 @@ export default class MessageField extends React.Component {
                /> 
             </div>
             
-            <FloatingActionButton 
+            <button className={'msgSendBtn'} 
                onClick = {this.sendMessage} >
-               <SendIcon />
-            </FloatingActionButton> 
+               Send 
+            </button> 
          </div> 
       </div>
       )
