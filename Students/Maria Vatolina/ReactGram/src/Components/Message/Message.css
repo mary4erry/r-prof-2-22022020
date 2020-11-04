@@ -1,12 +1,21 @@
 .msg {
-   /* width: 40%; */
+   width: 40%;
    background-color: lightblue;
    padding: 5px;
    border-radius: 10px;
    font-size: 18px;
    margin: 5px;
 }
+.msgAnswer{
+   background-color: skyblue;
+   align-self: flex-start;
+}
+.msgMy {
+   background-color: lightblue;
+   align-self: flex-end;
+}
 .msgSender{
+   font-size: 14px;
    color: lightslategray;
 }
 .msgText{

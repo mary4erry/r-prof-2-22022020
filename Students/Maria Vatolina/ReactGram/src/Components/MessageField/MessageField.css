@@ -1,5 +1,4 @@
 .root{
-   /* height: 100vh; */
    width: 100%;
    margin: auto;
    display: flex;
@@ -12,6 +11,7 @@
    display: flex;
    flex-direction: column;
    justify-content: flex-end;
+   overflow: hidden;
 }
 .control{
    width: 90%;
@@ -23,9 +23,6 @@
    width: 85%;
    margin-right: 10px;
 }
-/* .msgInput{
-   width: 100%;
-} */
 .msgSendBtn {
    margin: 10px;
    background-color:lightgrey;

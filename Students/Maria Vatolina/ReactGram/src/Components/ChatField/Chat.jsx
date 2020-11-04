@@ -5,8 +5,7 @@ import { List,
          ListItemText, 
          Avatar,
          makeStyles,
-         Badge, 
-         Divider } from '@material-ui/core'
+         Badge, } from '@material-ui/core'
 
 const useStyles = makeStyles((theme) => ({
   root: {
