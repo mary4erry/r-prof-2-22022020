@@ -1,13 +1,15 @@
 import React, { Component } from 'react'
 import { Grid } from '@material-ui/core'
-// import PropTypes from 'prop-types'
+import PropTypes from 'prop-types'
 import './style.css'
 
 import Messages from '../MessageField/MessageField.jsx'
 import Chats from '../ChatField/ChatField.jsx'
 
 export default class Layout extends Component {
-  
+   static propTypes = {
+      usr: PropTypes.string,
+   }
    render () {
       const { usr } = this.props
 
