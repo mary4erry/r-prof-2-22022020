@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-import style from './MessageField.css'
+import './MessageField.css'
 import { TextField, FloatingActionButton } from 'material-ui';
 import SendIcon from 'material-ui/svg-icons/content/send';
 
@@ -38,8 +38,9 @@ export default class MessageField extends React.Component {
       this.textInput.current.focus()
 
    }
-   componentDidUpdate() {
-      if (this.state.messages[this.state.messages.length - 1].user === 'Me') {
+   componentDidUpdate(prevProps, prevState) {
+      if (prevState.messages.length < this.state.messages.length &&
+         this.state.messages[this.state.messages.length - 1].user === 'Me') {
          setTimeout(() => {
             this.setState({
                messages: [...this.state.messages, {
