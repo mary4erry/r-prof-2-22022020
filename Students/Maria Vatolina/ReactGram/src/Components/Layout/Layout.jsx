@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Grid } from '@material-ui/core'
+import { Grid, Header } from '@material-ui/core'
 import PropTypes from 'prop-types'
 import './style.css'
 
@@ -9,13 +9,21 @@ import Chats from '../ChatField/ChatField.jsx'
 export default class Layout extends Component {
    static propTypes = {
       usr: PropTypes.string,
+      chatId: PropTypes.number,
    }
+   static defaultProps = {
+      chatId: 1,
+   }     
    render () {
-      const { usr } = this.props
-
+      const { usr, chatId } = this.props
       return (
-         <div className="container">
-            <div className={'header'}> ReactGram &copy;</div>
+         <div className='container'>
+            <div className={'header'}
+               // chatId={ chatId }
+            > 
+               <p> ReactGram &copy; </p>
+               {/* <p> Chat: {chatId} </p>  */}
+            </div>
             <Grid container spacing={0}>
                <Grid item xs={3}>
                   <Chats 
