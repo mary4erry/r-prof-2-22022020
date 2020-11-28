@@ -8,14 +8,14 @@ import Chats from '../ChatField/ChatField.jsx'
 
 export default class Layout extends Component {
    static propTypes = {
-      usr: PropTypes.string,
       chatId: PropTypes.number,
    }
    static defaultProps = {
       chatId: 1,
    }     
    render () {
-      const { usr, chatId } = this.props
+      const { chatId } = this.props
+
       return (
          <div className='container'>
             <div className={'header'}
@@ -30,8 +30,7 @@ export default class Layout extends Component {
                   />
                </Grid>
                <Grid item xs={9}>
-                  <Messages usr={usr}
-                  />
+                  <Messages />
                </Grid>
             </Grid>
          </div>

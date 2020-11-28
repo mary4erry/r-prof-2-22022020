@@ -19,6 +19,7 @@ class MessageField extends React.Component {
       super(props)
       this.textInput = React.createRef();
       this.state = { 
+         usr: 'Me',
          input: '',
          chats: {
                1: {title: 'Чат 1', messageList: [1]},
@@ -31,20 +32,14 @@ class MessageField extends React.Component {
       this.textInput.current.focus()
 
    }
-   // componentDidUpdate(prevProps, prevState) {      
-   //    if (prevState.messages.length < this.state.messages.length &&
-   //       this.state.messages[this.state.messages.length - 1].user === 'Me') {
-   //       setTimeout(() => {
-   //          this.setState({
-   //             messages: [...this.state.messages, {
-   //                user: null,
-   //                text: 'ask me later...'
-   //             }],
-   //             input: ''
-   //          })
-   //       }, 500)
-   //    }
-   // }
+   componentDidUpdate() {  
+      const {messages} = this.props
+      if (Object.keys(messages).length % 2 === 1) {
+         setTimeout(() => {
+            this.sendMessage(null, 'ask me later...')
+         }, 500)
+      }
+   }
 
    sendMessage = (sender, text) => {
       const { messages, sendMessage } = this.props
@@ -54,19 +49,17 @@ class MessageField extends React.Component {
    }
 
    handleChange = (evt) => {
-      if (evt.keyCode !== 13) this.setState({
-            input: evt.target.value
-         }) 
-         // :
-         // this.sendMessage(evt)
-         //сделать нажатие на кнопку и добавить ответ бота через redux
+      if (evt.keyCode !== 13){
+         this.setState({ input: evt.target.value })
+      } else {
+         this.sendMessage(this.state.input, this.state.usr)
+         this.setState({input: ''})
+      } 
    }
    
    handleSendMessage = (sender, message ) => {
       this.setState({input: ''})
-      if (sender == 'Me'){
-         this.sendMessage(sender, message)
-      }   
+      if (sender == 'Me') this.sendMessage(sender, message)
    }
 
    render() {
@@ -101,7 +94,7 @@ class MessageField extends React.Component {
             
             <FloatingActionButton
                className={'msgSendBtn'} 
-               onClick = { () => this.handleSendMessage('Me', this.state.input)} >
+               onClick = { () => this.handleSendMessage(this.state.usr, this.state.input)} >
                <SendIcon /> 
             </FloatingActionButton> 
          </div> 
