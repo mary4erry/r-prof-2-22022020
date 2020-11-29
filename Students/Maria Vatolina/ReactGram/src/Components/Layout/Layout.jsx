@@ -1,12 +1,11 @@
 import React, { Component } from 'react'
-import { Grid, 
-         Divider} from '@material-ui/core'
+import { Grid } from '@material-ui/core'
 import PropTypes from 'prop-types'
 import './style.css'
 
 import Messages from '../MessageField/MessageField.jsx'
 import Chats from '../ChatField/ChatField.jsx'
-import AppNav from './NavBar/NavBar'
+import Header from './Header/Header'
 
 export default class Layout extends Component {
    static propTypes = {
@@ -20,7 +19,7 @@ export default class Layout extends Component {
 
       return (
          <div className='container'>
-            <AppNav chatId={chatId}/>
+            <Header chatId={ chatId }/>
             <Grid container spacing={0}>
                <Grid item xs={3}>                  
                   <Chats />

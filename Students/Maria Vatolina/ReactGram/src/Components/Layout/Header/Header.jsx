@@ -26,8 +26,7 @@ const useStyles = makeStyles((theme) => ({
    },
 }))
 
-export default function AppNav(props) {
-   const {chatId} = props
+export default function Header (props) {
    const classes = useStyles()
    const [auth, setAuth] = React.useState(true)
    const [anchorEl, setAnchorEl] = React.useState(null)
@@ -63,7 +62,7 @@ export default function AppNav(props) {
                <Typography variant="h6" className={classes.title}>
                   ReactGram &copy;
                </Typography>
-               <Typography> Chat: {chatId} </Typography> 
+               <Typography> ChatRoom: { props.chatId } </Typography> 
                {auth && (
                   <div>
                      <IconButton

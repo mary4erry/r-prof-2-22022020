@@ -21,7 +21,7 @@ let Chat = () => {
    const classes = useStyles();
    return (
       <List className={classes.root} >
-         <Link to='/chat/1/'>
+         <Link to='/chat/1'>
             <ListItem primaryText='Chat 1'>
                <ListItemAvatar>
                   <Badge color="secondary" overlap="circle">
@@ -33,7 +33,7 @@ let Chat = () => {
             </ListItem>
          </Link>
          <Divider />
-         <Link to='/chat/2/'>
+         <Link to='/chat/2'>
             <ListItem primaryText='Chat 2'>
                <ListItemAvatar>
                   <Badge color="secondary" overlap="circle" variant="dot">
@@ -45,7 +45,7 @@ let Chat = () => {
             </ListItem>
          </Link>
          <Divider />
-         <Link to='/chat/3/'>
+         <Link to='/chat/3'>
             <ListItem primaryText='Chat 3'>
                <ListItemAvatar>
                   <Badge color="secondary" overlap="circle">
