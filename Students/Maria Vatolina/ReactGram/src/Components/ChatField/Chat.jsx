@@ -5,12 +5,15 @@ import { List,
          ListItemText, 
          Avatar,
          makeStyles,
-         Badge, } from '@material-ui/core'
+         Badge,
+         Divider, } from '@material-ui/core'
 import {Link} from 'react-router-dom'
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-      backgroundColor: theme.palette.success.light,
+   text: {
+      whiteSpace: 'nowrap',
+      overflow: 'hidden',
+      textOverflow: 'ellipsis',
    },
 }))
          
@@ -25,10 +28,11 @@ let Chat = () => {
                         <Avatar className={classes.avatar}>A</Avatar>
                   </Badge>
                </ListItemAvatar>
-               <ListItemText primary="Anna" secondary="See you later" />
+               <ListItemText 
+                  className={classes.text} primary="Anna" secondary="See you later" />
             </ListItem>
          </Link>
-         
+         <Divider />
          <Link to='/chat/2/'>
             <ListItem primaryText='Chat 2'>
                <ListItemAvatar>
@@ -36,10 +40,11 @@ let Chat = () => {
                         <Avatar className={classes.avatar}>H</Avatar>
                   </Badge>
                </ListItemAvatar>
-               <ListItemText primary="Help" secondary="You are welcome!" />
+               <ListItemText 
+                  className={classes.text} primary="Help" secondary="You are welcome!" />
             </ListItem>
          </Link>
-         
+         <Divider />
          <Link to='/chat/3/'>
             <ListItem primaryText='Chat 3'>
                <ListItemAvatar>
@@ -47,9 +52,11 @@ let Chat = () => {
                         <Avatar className={classes.avatar}>DV</Avatar>
                   </Badge>
                </ListItemAvatar>
-               <ListItemText primary="Darth Vader" secondary="Join the dark side..." />
+               <ListItemText
+                  className={classes.text} primary="Darth Vader" secondary="Join the dark side..." />
             </ListItem>
          </Link>
+         <Divider />
       </List>
    )
 }

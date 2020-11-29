@@ -3,8 +3,3 @@
    height: 100vh;
    margin: 0 auto;
 } 
-.header{
-   display: flex;
-   justify-content: space-between;
-   padding: 10px 0;
-}

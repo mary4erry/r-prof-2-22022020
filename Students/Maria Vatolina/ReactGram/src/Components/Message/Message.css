@@ -3,7 +3,7 @@
    background-color: lightblue;
    padding: 5px;
    border-radius: 10px;
-   font-size: 18px;
+   font-size: 14px;
    margin: 5px;
 }
 .msgAnswer{
@@ -15,7 +15,7 @@
    align-self: flex-end;
 }
 .msgSender{
-   font-size: 14px;
+   font-size: 12px;
    color: lightslategray;
 }
 .msgText{
