@@ -20,21 +20,6 @@ class MessageField extends React.Component {
       this.textInput.current.focus()
    }
 
-   // componentDidUpdate(prevProps) { 
-   //    const { chatId, messages } = this.props
-   //    let chatMessages = messages[chatId]
-
-   //    console.log('====================================');
-   //    console.log(Object.keys(prevProps.chatMessages).length);
-   //    console.log('===================================='); 
-
-   //    if (Object.keys(prevProps.chatMessages).length < Object.keys(chatMessages).length && chatMessages[Object.keys(chatMessages).length].user === this.state.usr) {
-   //       setTimeout(() => {
-   //          this.sendMessage(null, 'ask me later...')
-   //       }, 500)
-   //    }
-   // }
-
    sendMessage = (sender, text) => {
       const { messages, sendMessage, chatId } = this.props
       const messageId = Object.keys(messages[chatId]).length + 1
