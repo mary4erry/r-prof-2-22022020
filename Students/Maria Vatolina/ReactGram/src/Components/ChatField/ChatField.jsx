@@ -21,6 +21,7 @@ import ChatList from './Chat'
 
 const useStyles = (theme => ({
    root: {
+      overflow: 'hidden',
       borderRight: '3px solid rgba(0, 0, 0, .1)',
       height: 'calc(100vh - 130px)',
    },
@@ -75,7 +76,6 @@ class ChatField extends Component {
       const ChatRoomsArr = []
       Object.keys(chats).forEach ( chatRoomId => {
          let lastMsgIndex
-         // console.log(chatRoomId);
          messages[chatRoomId] ? lastMsgIndex = Object.keys(messages[chatRoomId]).length : ''
 
          ChatRoomsArr.push (

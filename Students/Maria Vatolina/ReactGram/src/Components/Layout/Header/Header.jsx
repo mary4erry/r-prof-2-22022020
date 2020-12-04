@@ -11,7 +11,8 @@ import { makeStyles,
          MenuItem } from '@material-ui/core'
 import { Settings, 
          PostAdd,
-         AccountCircle } from '@material-ui/icons'
+         AccountCircle,
+         AddCircleOutline } from '@material-ui/icons'
 import MenuIcon from '@material-ui/icons/Menu'
 
 const useStyles = makeStyles((theme) => ({
@@ -48,12 +49,12 @@ export default function Header (props) {
       <div className={classes.root}>
          <AppBar position="static">
             <Toolbar>
-               <IconButton 
+               {/* <IconButton 
                   edge="start" className={classes.menuButton}   color="inherit" aria-label="menu">
                   <MenuIcon />
-               </IconButton>
+               </IconButton> */}
                <IconButton>
-                  <PostAdd />
+                  <AddCircleOutline />
                </IconButton>
                <IconButton>
                   <Settings />
