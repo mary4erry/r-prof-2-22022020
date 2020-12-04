@@ -7,13 +7,6 @@ import SendIcon from 'material-ui/svg-icons/content/send';
 
 import Message from '../Message/Message.jsx'
 
-//ACTIONS
-import { sendMessage } from '../../store/actions/messages_action.js'
-
-//redux
-import { bindActionCreators } from 'redux'
-import connect from 'react-redux/es/connect/connect'
-
 class MessageField extends React.Component {
    constructor(props) {
       super(props)
@@ -21,38 +14,39 @@ class MessageField extends React.Component {
       this.state = { 
          usr: 'Me',
          input: '',
-         chats: {
-               1: {title: 'Чат 1', messageList: [1]},
-               2: {title: 'Чат 2', messageList: [2]},
-               3: {title: 'Чат 3', messageList: [3]},
-            },
       }
    }
    componentDidMount() {
       this.textInput.current.focus()
+   }
 
-   }
-   componentDidUpdate() {  
-      const {messages} = this.props
-      if (Object.keys(messages).length % 2 === 1) {
-         setTimeout(() => {
-            this.sendMessage(null, 'ask me later...')
-         }, 500)
-      }
-   }
+   // componentDidUpdate(prevProps) { 
+   //    const { chatId, messages } = this.props
+   //    let chatMessages = messages[chatId]
+
+   //    console.log('====================================');
+   //    console.log(Object.keys(prevProps.chatMessages).length);
+   //    console.log('===================================='); 
+
+   //    if (Object.keys(prevProps.chatMessages).length < Object.keys(chatMessages).length && chatMessages[Object.keys(chatMessages).length].user === this.state.usr) {
+   //       setTimeout(() => {
+   //          this.sendMessage(null, 'ask me later...')
+   //       }, 500)
+   //    }
+   // }
 
    sendMessage = (sender, text) => {
-      const { messages, sendMessage } = this.props
-      const messageId = Object.keys(messages).length + 1
+      const { messages, sendMessage, chatId } = this.props
+      const messageId = Object.keys(messages[chatId]).length + 1
 
-      sendMessage(messageId, sender, text)
+      sendMessage(chatId, messageId, sender, text)
    }
 
    handleChange = (evt) => {
       if (evt.keyCode !== 13){
          this.setState({ input: evt.target.value })
       } else {
-         this.sendMessage(this.state.input, this.state.usr)
+         this.sendMessage( this.state.usr, this.state.input )
          this.setState({input: ''})
       } 
    }
@@ -63,16 +57,18 @@ class MessageField extends React.Component {
    }
 
    render() {
-      const { chats, input } = this.state
-      const { chatId, messages } = this.props
+      const { input } = this.state
+      const { chatId, chats, messages } = this.props
+      const chatMessages = messages[chatId]
 
       const MessagesArr = []
-      Object.keys(messages).forEach ( key => MessagesArr.push (<Message 
-         sender = { messages[key].user } 
-         text = { messages[key].text }
-         key = { key} 
+      Object.keys(chatMessages).forEach ( messageId => MessagesArr.push (<Message 
+         sender = { chatMessages[messageId].user } 
+         text = { chatMessages[messageId].text }
+         key = { messageId} 
          />)
       )
+
       return ( 
       <div className='root'>
          <div className='messageField'> 
@@ -86,7 +82,7 @@ class MessageField extends React.Component {
                   type='text'    
                   name='input'
                   onChange = { this.handleChange }
-                  // onKeyUp = { this.handleChange }
+                  onKeyUp = { this.handleChange }
                   value = { input } 
                   ref={this.textInput}
                /> 
@@ -103,10 +99,4 @@ class MessageField extends React.Component {
    }
 }
 
-const mapStateToProps = ({ msgReducer }) => ({
-   messages: msgReducer.messages
-})
-const mapDispatchToProps = dispatch => 
-   bindActionCreators( { sendMessage }, dispatch)
-
-export default connect(mapStateToProps, mapDispatchToProps)(MessageField)
+export default MessageField

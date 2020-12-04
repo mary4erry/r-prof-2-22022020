@@ -7,9 +7,8 @@ export default class Router extends React.Component {
       return (
       <Switch>
          <Route exact path='/' component={ Layout } />
-
          <Route exact 
-            path='/:chatId/' 
+            path='/chat/:chatId/' 
             render={ (obj) =>
                <Layout chatId={ Number(obj.match.params.chatId)} />
             } 

@@ -17,7 +17,6 @@ ReactDOM.render (
             <Router />
          </MuiThemeProvider>
       </Provider>
-      
    </BrowserRouter>
    
    , document.getElementById('app')
