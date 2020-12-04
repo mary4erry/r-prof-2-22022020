@@ -3,12 +3,12 @@ import ReactDOM from 'react-dom'
 import './Message.css'
 
 const Message = (props) => {
-   let { sender, text } = props
-   sender ? sender = sender : sender = 'Bot'
+   let { sender, text, chatId, chats } = props
+   sender ? sender = sender : sender = chats[chatId].title
 
    let msgClass = 'msg'
-   sender !== 'Me'
-      ? msgClass += ' ' + 'msgAnswer' : msgClass += ' ' +  'msgMy'
+   sender !== 'Me' ? msgClass += ' ' + 'msgAnswer' : 
+      msgClass += ' ' +  'msgMy'
    return (
       <div className={msgClass}>
          <strong className='msgSender'> { sender }: </strong>
