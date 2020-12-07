@@ -12,18 +12,20 @@ import { Box,
          ListItemAvatar, 
          ListItemText, 
          Avatar,
-         Badge,
-         TextField } from '@material-ui/core'
+         Badge } from '@material-ui/core'
 import { withStyles } from '@material-ui/core/styles'
-import { PostAdd, AddBox } from '@material-ui/icons'
+import { AddBox } from '@material-ui/icons'
 
-import ChatList from './Chat'
+// import ChatList from './Chat'
 
 const useStyles = (theme => ({
    root: {
       overflow: 'hidden',
       borderRight: '3px solid rgba(0, 0, 0, .1)',
       height: 'calc(100vh - 130px)',
+   },
+   chatItem: {
+      cursor: 'pointer'
    },
    newChat: {
       display: 'flex',
@@ -47,7 +49,13 @@ class ChatField extends Component {
       chatId: PropTypes.number.isRequired,
       chats: PropTypes.object.isRequired,
       messages: PropTypes.object.isRequired,
-      classes: PropTypes.object
+      addChat: PropTypes.func.isRequired,
+      classes: PropTypes.object,
+      push: PropTypes.func.isRequired,
+   }
+
+   handleNavigate = (link) => {
+      this.props.push(link)
    }
 
    handleChange = (event) => {
@@ -74,13 +82,15 @@ class ChatField extends Component {
    render() {
       const { classes, chats, chatId, messages } = this.props
       const ChatRoomsArr = []
+
       Object.keys(chats).forEach ( chatRoomId => {
          let lastMsgIndex
          messages[chatRoomId] ? lastMsgIndex = Object.keys(messages[chatRoomId]).length : ''
 
          ChatRoomsArr.push (
-            <Link to={`/chat/${chatRoomId}`} key={chatRoomId}>
-               <ListItem>
+               <ListItem className={ classes.chatItem }
+                  onClick={ () => this.handleNavigate(`/chat/${chatRoomId}`) } 
+                  key={chatRoomId} >
                   <ListItemAvatar>
                      <Badge color="secondary" overlap="circle">
                         <Avatar className={classes.avatar}>
@@ -93,9 +103,9 @@ class ChatField extends Component {
                      primary={chats[chatRoomId].title} 
                      secondary={lastMsgIndex ? messages[chatRoomId].[lastMsgIndex].text : 'no messages'}
                      />
+                  {/* <Divider/> */}
                </ListItem>
-               <Divider/>
-            </Link>
+
          )
       })
 

@@ -8,7 +8,7 @@ import { sendMessage, addChatToStore } from "../../store/actions/messages_action
 //redux
 import { bindActionCreators } from 'redux'
 import connect from 'react-redux/es/connect/connect'
-
+import { push } from 'connected-react-router'
 
 import Messages from '../MessageField/MessageField.jsx'
 import Chats from '../ChatField/ChatField.jsx'
@@ -17,12 +17,13 @@ import Header from './Header/Header'
 class Layout extends Component {
    static propTypes = {
       chatId: PropTypes.number,
+      push: PropTypes.func.isRequired,
    }
    static defaultProps = {
       chatId: 1,
    }     
    render () {
-      const { chatId, chats, messages, sendMessage, addChat, addChatToStore } = this.props
+      const { chatId, chats, messages, sendMessage, addChat, addChatToStore, push } = this.props
       return (
          <div className='container'>
             <Header title={ chats[chatId].title }/>
@@ -33,6 +34,7 @@ class Layout extends Component {
                      messages={ messages } 
                      addChat={ addChat }
                      addChatToStore={ addChatToStore }
+                     push={ push }
                   />
                </Grid>
                <Grid item xs={9}>
@@ -52,6 +54,6 @@ const mapStateToProps = ({ chatReducer, msgReducer }) => ({
    messages: msgReducer.messages,
 })
 const mapDispatchToProps = dispatch => 
-   bindActionCreators( { addChat, sendMessage, addChatToStore }, dispatch)
+   bindActionCreators( { addChat, push, sendMessage, addChatToStore }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(Layout)

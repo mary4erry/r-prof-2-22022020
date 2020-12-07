@@ -2,7 +2,9 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { BrowserRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
-import initStore from './store/store.js'
+import { ConnectedRouter } from 'connected-react-router'
+
+import initStore, { history } from './store/store.js'
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import './style.css'
@@ -11,13 +13,12 @@ import './style.css'
 import Router from './Router/Router';
 
 ReactDOM.render (
-   <BrowserRouter>
       <Provider store = { initStore() }>
-         <MuiThemeProvider>
-            <Router />
-         </MuiThemeProvider>
+         <ConnectedRouter history={history}>
+            <MuiThemeProvider>
+               <Router />
+            </MuiThemeProvider>
+         </ConnectedRouter>
       </Provider>
-   </BrowserRouter>
-   
-   , document.getElementById('app')
+      , document.getElementById('app')
 )
