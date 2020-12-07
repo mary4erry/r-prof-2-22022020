@@ -36,6 +36,10 @@ const useStyles = (theme => ({
       overflow: 'hidden',
       textOverflow: 'ellipsis',
    },
+   selected: {
+      backgroundColor: theme.palette.primary.main,
+      color: theme.palette.secondary.main,
+   },
 }))
 
 class ChatField extends Component {
@@ -90,6 +94,7 @@ class ChatField extends Component {
          ChatRoomsArr.push (
                <ListItem className={ classes.chatItem }
                   onClick={ () => this.handleNavigate(`/chat/${chatRoomId}`) } 
+                  selected={ chatId === +chatRoomId ? true : false }
                   key={chatRoomId} >
                   <ListItemAvatar>
                      <Badge color="secondary" overlap="circle">

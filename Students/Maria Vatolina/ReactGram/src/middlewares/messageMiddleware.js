@@ -8,7 +8,7 @@ export default store => next => (action) => {
                store.dispatch(
                   sendMessage(
                      action.chatId, 
-                     Object.keys(store.getState().msgReducer.messages).length + 1,
+                     Object.keys(store.getState().msgReducer.messages[action.chatId]).length + 1,
                      'Bot', 
                      'ask me later...' ))
             }, 500)
