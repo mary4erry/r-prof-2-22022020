@@ -18,13 +18,31 @@ class MessageField extends React.Component {
    }
    componentDidMount() {
       this.textInput.current.focus()
+      let msgs = null
+
+      fetch('api/messages')
+         .then( d => d.json())
+         .then( data => msgs = data)
+         .finally(() => {
+            console.log(msgs)
+         })
    }
 
    sendMessage = (sender, text) => {
       const { messages, sendMessage, chatId } = this.props
       const messageId = Object.keys(messages[chatId]).length + 1
 
-      sendMessage(chatId, messageId, sender, text)
+      // sendMessage(chatId, messageId, sender, text)
+
+      let newMsg = {
+         sender: sender,
+         text: text,
+         chatId: chatId
+      }
+      fetch('/api/message', {
+         method: 'POST', headers: { 'Content-Type': 'application/json' },
+         body: JSON.stringify(newMsg)
+      })
    }
 
    handleChange = (evt) => {
