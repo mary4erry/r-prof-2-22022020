@@ -2,9 +2,11 @@ import React, { Component } from 'react'
 import { Grid } from '@material-ui/core'
 import PropTypes from 'prop-types'
 import './style.css'
+
 //store
 import { addChat } from "../../store/actions/chats_action"
-import { sendMessage, addChatToStore } from "../../store/actions/messages_action"
+import { loadMessages, sendMessage, addChatToStore } from "../../store/actions/messages_action"
+
 //redux
 import { bindActionCreators } from 'redux'
 import connect from 'react-redux/es/connect/connect'
@@ -16,17 +18,26 @@ import Header from './Header/Header'
 
 class Layout extends Component {
    static propTypes = {
-      chatId: PropTypes.number,
+      // chatId: PropTypes.string,
+      loadMessages: PropTypes.func.isRequired,
+      isLoading: PropTypes.bool.isRequired,
       push: PropTypes.func.isRequired,
    }
    static defaultProps = {
       chatId: 1,
-   }     
+   }   
+   
+   componentDidMount () {
+      this.props.loadMessages()
+   }
+
    render () {
-      const { chatId, chats, messages, sendMessage, addChat, addChatToStore, push } = this.props
+      const { isLoading, chatId, chats, messages, sendMessage, addChat, addChatToStore, push } = this.props  
+   
       return (
          <div className='container'>
-            <Header title={ chats[chatId].title }/>
+            <Header 
+               title={ chats[chatId] ? chats[chatId].title : '' }/>
             <Grid container spacing={0}>
                <Grid item xs={3}>                  
                   <Chats chatId={ chatId } 
@@ -40,8 +51,9 @@ class Layout extends Component {
                <Grid item xs={9}>
                   <Messages chatId={ chatId } 
                      chats={ chats } 
-                     messages={ messages }
+                     messages={ messages } 
                      sendMessage={ sendMessage }
+                     isLoading={isLoading}
                   />
                </Grid>
             </Grid>
@@ -52,8 +64,9 @@ class Layout extends Component {
 const mapStateToProps = ({ chatReducer, msgReducer }) => ({
    chats: chatReducer.chats,
    messages: msgReducer.messages,
+   isLoading: msgReducer.isLoading,
 })
 const mapDispatchToProps = dispatch => 
-   bindActionCreators( { addChat, push, sendMessage, addChatToStore }, dispatch)
+   bindActionCreators( { addChat, push, sendMessage, addChatToStore, loadMessages }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(Layout)

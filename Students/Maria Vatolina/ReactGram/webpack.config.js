@@ -14,22 +14,22 @@ module.exports = {
    mode: 'development', //'production'
    // mode: 'production',
    devServer: {
-      contentBase: './dist',
+      // contentBase: './dist',
       port: 3000,
       hot: true,
       open: true,
-      historyApiFallback: {
-         index: 'index.html'
-      },
+      // historyApiFallback: {
+      //    index: 'index.html'
+      // },
       proxy: {
          '/api': {
             target: 'http://localhost:3300',
             pathRewrite: { '^/api' : '' },
             secure: false,
             changeOrigin: true,
-            headers: {
-               Connection: 'keep-alive'  // a way to fix devServer proxy bug on macOS
-            },
+            // headers: {
+            //    Connection: 'keep-alive'  // a way to fix devServer proxy bug on macOS
+            // },
          }
       }        
    },

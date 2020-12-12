@@ -1,0 +1,44 @@
+[
+   {
+      "_id":"5e7129a13189dd346227cf95",
+      "messageId":"1",
+      "sender":"Anna",
+      "text":"Приветствую! Предлагаем к использованию наш новый продукт",
+      "chatId":"5e73426e28fbcc368e3cdc4a"
+   },
+   {
+      "_id":"5e7129c43189dd346227cf96",
+      "messageId":"2",
+      "sender":"Me",
+      "text":"Спасибо",
+      "chatId":"5e73426e28fbcc368e3cdc4a"
+   },
+   {
+      "_id":"5e7129e93189dd346227cf97",
+      "messageId":"3",
+      "sender":"Darth Vader",
+      "text":"You don't know the power of the Dark Side!",
+      "chatId":"5e73426e28fbcc368e3cdc4b"
+   },
+   {
+      "_id":"5e7129fd3189dd346227cf98",
+      "messageId":"4",
+      "sender":"HelpBot",
+      "text":"Здравствуйте! Чем могу помочь?",
+      "chatId":"5e73436bdf204037f2c13626"
+   },
+   {
+      "_id":"5e712a0e3189dd346227cf99",
+      "messageId":"5",
+      "sender":"Me",
+      "text":"Приложение не работает",
+      "chatId":"5e73436bdf204037f2c13626"
+   },
+   {
+      "_id":"5e712a1d3189dd346227cf9a",
+      "messageId":"6",
+      "sender":"HelpBot",
+      "text":"Мы изучим вашу проблему и ответим позже, ожидайте",
+      "chatId":"5e73436bdf204037f2c13626"
+   },
+]

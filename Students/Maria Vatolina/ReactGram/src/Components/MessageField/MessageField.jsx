@@ -1,31 +1,39 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import PropTypes from 'prop-types'
 
 import './MessageField.css'
 import { TextField, FloatingActionButton } from 'material-ui';
+import CircularProgress from 'material-ui/CircularProgress'
 import SendIcon from 'material-ui/svg-icons/content/send';
 
 import Message from '../Message/Message.jsx'
 
 class MessageField extends React.Component {
-   constructor(props) {
-      super(props)
-      this.textInput = React.createRef();
-      this.state = { 
-         usr: 'Me',
-         input: '',
-      }
+   static propTypes = {
+      isLoading: PropTypes.bool.isRequired,
+   }
+   textInput = React.createRef();
+   state = { 
+      usr: 'Me',
+      input: '',
    }
    componentDidMount() {
       this.textInput.current.focus()
       let msgs = null
 
-      fetch('api/messages')
-         .then( d => d.json())
-         .then( data => msgs = data)
-         .finally(() => {
-            console.log(msgs)
-         })
+      //Database
+      // fetch('/api/messages')
+      //    .then( d => d.json())
+      //    .then( data => msgs = data)
+      //    .finally(() => {
+      //       console.log(msgs)
+      //    })
+
+      //Static API
+      // fetch('static-api/messages.json')
+      //    .then( body => body.json())
+      //    .then( json => console.log(json))
    }
 
    sendMessage = (sender, text) => {
@@ -62,20 +70,25 @@ class MessageField extends React.Component {
    render() {
       const { input } = this.state
       const { chatId, chats, messages } = this.props
-      const chatMessages = messages[chatId]
 
       const MessagesArr = []
-      Object.keys(chatMessages).forEach ( messageId => MessagesArr.push (<Message 
-         sender = { chatMessages[messageId].user } 
-         text = { chatMessages[messageId].text }
-         key = { messageId} 
-         />)
-      )
+      if (chatId) {
+         Object.keys(messages).forEach ( messageId => MessagesArr.push (
+            <Message 
+               sender = { messages[messageId].sender } 
+               text = { messages[messageId].text }
+               key = { messageId} />
+         ))
+       }
 
+      if (this.props.isLoading) {
+         return <CircularProgress />
+      }
       return ( 
+         
       <div className='root'>
          <div className='messageField'> 
-            { MessagesArr } 
+            { MessagesArr ? MessagesArr : '' } 
          </div> 
          <div className={'control'}>
             <div className={'msgInput-wrapper'} >
