@@ -63,7 +63,10 @@ export default function Header (props) {
                <Typography variant="h6" className={classes.title}>
                   ReactGram &copy;
                </Typography>
-               <Typography> Chat with: { props.title } </Typography> 
+               { props.title ? 
+                  <Typography> Chat with: { props.title } </Typography> :
+                  null }
+               
                {auth && (
                   <div>
                      <IconButton
