@@ -50,7 +50,7 @@ class ChatField extends Component {
       }
    }
    static propTypes = {
-      chatId: PropTypes.number.isRequired,
+      // chatId: PropTypes.string.isRequired,
       chats: PropTypes.object.isRequired,
       messages: PropTypes.object.isRequired,
       addChat: PropTypes.func.isRequired,
@@ -82,16 +82,16 @@ class ChatField extends Component {
          this.setState({input: ''})
       }
    }
-   
    render() {
       const { classes, chats, chatId, messages } = this.props
       const ChatRoomsArr = []
 
       Object.keys(chats).forEach ( chatRoomId => {
-         let lastMsgIndex
-         messages[chatRoomId] ? lastMsgIndex = Object.keys(messages[chatRoomId]).length : ''
+         if (chats[chatRoomId] !== undefined) {
+            let chatMessages = chats[chatRoomId].messageList
+            let lastMsgIndex = chatMessages.length - 1
 
-         ChatRoomsArr.push (
+            ChatRoomsArr.push (
                <ListItem className={ classes.chatItem }
                   onClick={ () => this.handleNavigate(`/chat/${chatRoomId}`) } 
                   selected={ chatId === +chatRoomId ? true : false }
@@ -99,19 +99,19 @@ class ChatField extends Component {
                   <ListItemAvatar>
                      <Badge color="secondary" overlap="circle">
                         <Avatar className={classes.avatar}>
-                              {chats[chatRoomId].title[0].toUpperCase()}
+                           {chats[chatRoomId].title[0].toUpperCase()}
                         </Avatar>
                      </Badge>
                   </ListItemAvatar>
                   <ListItemText 
                      className={classes.text} 
                      primary={chats[chatRoomId].title} 
-                     secondary={lastMsgIndex ? messages[chatRoomId].[lastMsgIndex].text : 'no messages'}
+                     secondary={chatMessages.length ? chatMessages[lastMsgIndex].text : 'no messages'}
                      />
                   {/* <Divider/> */}
                </ListItem>
-
-         )
+            )
+         }
       })
 
       return (

@@ -2,6 +2,7 @@ const express = require('express')
 const mong = require('mongoose')
 
 const Message = require('./Models/message.js')
+const Chat = require('./Models/chat.js')
 
 const app = express()
 
@@ -22,13 +23,26 @@ mong.connect('mongodb://localhost/reactgram-v2', {
    .catch( error => { console.log('DB offline'), error })
    
 app.post('/message', async (req, res) => {
-   let message = new Message(req.body)
+   const message = new Message(req.body)
    message = await message.save()
    res.send(JSON.stringify({status: 1}))
+   // res.json(messages)
 })
 app.get('/messages', async (req, res) => {
    const messages = await Message.find()
    res.json(messages)
 })
+
+app.get('/chats', async (req, res) => {
+   const chats = await Chat.find()
+   res.json(chats)
+})
+app.post('/chat', async (req, res) => {
+   const chat = new Chat(req.body)
+   chat = await chat.save()
+   res.send(JSON.stringify({status: 1}))
+   // res.json(chat)
+})
+
 
 
