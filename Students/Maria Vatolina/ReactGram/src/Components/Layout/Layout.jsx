@@ -4,8 +4,8 @@ import PropTypes from 'prop-types'
 import './style.css'
 
 //store
-import { addChat } from "../../store/actions/chats_action"
-import { loadMessages, sendMessage, addChatToStore } from "../../store/actions/messages_action"
+import { loadСhats, addChat } from "../../store/actions/chats_action"
+import { loadMessages, sendMessage } from "../../store/actions/messages_action"
 
 //redux
 import { bindActionCreators } from 'redux'
@@ -22,18 +22,15 @@ class Layout extends Component {
       loadMessages: PropTypes.func.isRequired,
       isLoading: PropTypes.bool.isRequired,
       push: PropTypes.func.isRequired,
-   }
-   static defaultProps = {
-      chatId: 1,
-   }   
+   } 
    
    componentDidMount () {
+      this.props.loadСhats()
       this.props.loadMessages()
    }
 
    render () {
-      const { isLoading, chatId, chats, messages, sendMessage, addChat, addChatToStore, push } = this.props  
-   
+      const { isLoading, chatId, chats, messages, sendMessage, addChat, push } = this.props     
       return (
          <div className='container'>
             <Header 
@@ -44,7 +41,6 @@ class Layout extends Component {
                      chats={ chats } 
                      messages={ messages } 
                      addChat={ addChat }
-                     addChatToStore={ addChatToStore }
                      push={ push }
                   />
                </Grid>
@@ -67,6 +63,6 @@ const mapStateToProps = ({ chatReducer, msgReducer }) => ({
    isLoading: msgReducer.isLoading,
 })
 const mapDispatchToProps = dispatch => 
-   bindActionCreators( { addChat, push, sendMessage, addChatToStore, loadMessages }, dispatch)
+   bindActionCreators( { loadСhats, addChat, push, sendMessage, loadMessages }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(Layout)

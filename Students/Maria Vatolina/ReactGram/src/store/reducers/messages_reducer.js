@@ -1,30 +1,22 @@
 import update from "react-addons-update"
 
-import { SEND_MSG, NEW_CHAT,
+import { SUCCESS_MESSAGE_SENDING,
    START_MESSAGES_LOADING,
    SUCCESS_MESSAGES_LOADING,
    ERROR_MESSAGES_LOADING } from "../actions/messages_action"
 
-const iniialStore = {
+const initialStore = {
    isLoading: false,
    messages: { }, 
 }
 
-export default function msgReducer( store = iniialStore, action) {
+export default function msgReducer( store = initialStore, action) {
    switch (action.type) {
-      case SEND_MSG: {
-         console.log(store.messages);
+      case SUCCESS_MESSAGE_SENDING: {
+         const { _id, sender, text, chatId } = action.payload
          return update(store, {
-            messages: { [action.chatId]: {
-               $merge: { [action.messageId]: { user: action.sender, text: action.text } 
-               }
-            } }
-         })
-      }
-      case NEW_CHAT: {
-         return update(store, {
-            messages: {
-               $merge: { [action.chatId]: {  } }
+            messages: { 
+               $merge: { [_id]: { text, sender, chatId } } 
             }
          })
       }
@@ -38,7 +30,7 @@ export default function msgReducer( store = iniialStore, action) {
 
          action.payload.forEach(msg => {
             const { _id, text, sender, chatId } = msg;
-            messages[msg._id] = { sender, text, chatId };
+            messages[_id] = { sender, text, chatId };
          })
          return update(store, {
             messages: { $set: messages },

@@ -10,7 +10,7 @@ export default class Router extends React.Component {
          <Route exact 
             path='/chat/:chatId/' 
             render={ (obj) =>
-               <Layout chatId={ Number(obj.match.params.chatId)} />
+               <Layout chatId={obj.match.params.chatId} />
             } 
          />
       </Switch>

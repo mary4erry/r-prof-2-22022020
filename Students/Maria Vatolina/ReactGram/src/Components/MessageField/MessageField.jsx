@@ -20,37 +20,29 @@ class MessageField extends React.Component {
    }
    componentDidMount() {
       this.textInput.current.focus()
-      let msgs = null
-
-      //Database
-      // fetch('/api/messages')
-      //    .then( d => d.json())
-      //    .then( data => msgs = data)
-      //    .finally(() => {
-      //       console.log(msgs)
-      //    })
-
-      //Static API
-      // fetch('static-api/messages.json')
-      //    .then( body => body.json())
-      //    .then( json => console.log(json))
    }
 
    sendMessage = (sender, text) => {
       const { messages, sendMessage, chatId } = this.props
-      const messageId = Object.keys(messages[chatId]).length + 1
+      console.log(messages);
+      // const messageId = Object.keys(messages[chatId]).length + 1
 
-      // sendMessage(chatId, messageId, sender, text)
+      sendMessage(chatId, messageId, sender, text)
 
-      let newMsg = {
-         sender: sender,
-         text: text,
-         chatId: chatId
-      }
-      fetch('/api/message', {
-         method: 'POST', headers: { 'Content-Type': 'application/json' },
-         body: JSON.stringify(newMsg)
-      })
+      // let newMsg = {
+      //    sender: sender,
+      //    text: text,
+      //    chatId: chatId
+      // }
+      // fetch('/api/message', {
+      //    method: 'POST', headers: { 'Content-Type': 'application/json' },
+      //    body: JSON.stringify(newMsg)
+      // })
+   }
+   
+   handleSendMessage = (sender, message ) => {
+      this.setState({input: ''})
+      if (sender == 'Me') this.sendMessage(sender, message)
    }
 
    handleChange = (evt) => {
@@ -62,25 +54,21 @@ class MessageField extends React.Component {
       } 
    }
    
-   handleSendMessage = (sender, message ) => {
-      this.setState({input: ''})
-      if (sender == 'Me') this.sendMessage(sender, message)
-   }
-
    render() {
       const { input } = this.state
-      const { chatId, chats, messages } = this.props
+      const { chatId, chats } = this.props
 
       const MessagesArr = []
       if (chatId) {
-         Object.keys(messages).forEach ( messageId => MessagesArr.push (
+         let chatMessages = chats[chatId].messageList
+         Object.keys(chatMessages).forEach ( messageId => 
+         MessagesArr.push (
             <Message 
-               sender = { messages[messageId].sender } 
-               text = { messages[messageId].text }
+               sender = { chatMessages[messageId].sender } 
+               text = { chatMessages[messageId].text }
                key = { messageId} />
          ))
        }
-
       if (this.props.isLoading) {
          return <CircularProgress />
       }
