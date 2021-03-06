@@ -9,9 +9,7 @@ import { makeStyles,
          Menu,
          Switch,
          MenuItem } from '@material-ui/core'
-import { Settings, 
-         PostAdd,
-         AccountCircle,
+import { AccountCircle,
          AddCircleOutline } from '@material-ui/icons'
 import MenuIcon from '@material-ui/icons/Menu'
 
@@ -25,6 +23,9 @@ const useStyles = makeStyles((theme) => ({
    title: {
       flexGrow: 1,
    },
+   loginBlock: {
+      margin: '0px'
+   }
 }))
 
 export default function Header (props) {
@@ -48,18 +49,7 @@ export default function Header (props) {
    return (
       <div className={classes.root}>
          <AppBar position="static">
-            <Toolbar>
-               {/* <IconButton 
-                  edge="start" className={classes.menuButton}   color="inherit" aria-label="menu">
-                  <MenuIcon />
-               </IconButton> */}
-               <IconButton className={classes.menuButton}>
-                  <AddCircleOutline />
-               </IconButton>
-               {/* <IconButton className={classes.menuButton}>
-                  <Settings />
-               </IconButton> */}
-               
+            <Toolbar>               
                <Typography variant="h6" className={classes.title}>
                   ReactGram &copy;
                </Typography>
@@ -104,6 +94,7 @@ export default function Header (props) {
             <FormControlLabel
                control={<Switch checked={auth} onChange={handleChange} aria-label="login switch" />}
                label={auth ? 'Logout' : 'Login'}
+               className={classes.loginBlock}
             />
          </FormGroup>
       </div>

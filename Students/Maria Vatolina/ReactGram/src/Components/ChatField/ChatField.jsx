@@ -14,13 +14,13 @@ import { Box,
          Avatar,
          Badge } from '@material-ui/core'
 import { withStyles } from '@material-ui/core/styles'
-import { AddBox } from '@material-ui/icons'
+import { AddCircle } from '@material-ui/icons'
 
 // import ChatList from './Chat'
 
 const useStyles = (theme => ({
    root: {
-      overflow: 'hidden',
+      overflow: 'auto',
       borderRight: '3px solid rgba(0, 0, 0, .1)',
       height: 'calc(100vh - 130px)',
    },
@@ -112,13 +112,10 @@ class ChatField extends Component {
 
       return (
          <Box className={ classes.root }>
-            <List>
-               {ChatRoomsArr}
-            </List>
             <Box className={ classes.newChat }>
                <IconButton aria-label="create" 
                   onClick={ () => this.handleAdd() }>
-                  <AddBox />
+                  <AddCircle />
                </IconButton>
                <Input name="input"
                   placeholder="Add new chat"
@@ -127,6 +124,9 @@ class ChatField extends Component {
                   value={ this.state.input }
                />
             </Box>
+            <List>
+               {ChatRoomsArr}
+            </List>
          </Box>  
       )
    }
