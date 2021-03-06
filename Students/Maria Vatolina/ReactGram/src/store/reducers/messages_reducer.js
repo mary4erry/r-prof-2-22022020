@@ -13,10 +13,10 @@ const initialStore = {
 export default function msgReducer( store = initialStore, action) {
    switch (action.type) {
       case SUCCESS_MESSAGE_SENDING: {
-         const { _id, sender, text, chatId } = action.payload
+         const { _id, chatId, sender, text } = action.payload
          return update(store, {
             messages: { 
-               $merge: { [_id]: { text, sender, chatId } } 
+               $merge: { [_id]: { chatId, sender, text } } 
             }
          })
       }
@@ -30,7 +30,7 @@ export default function msgReducer( store = initialStore, action) {
 
          action.payload.forEach(msg => {
             const { _id, text, sender, chatId } = msg;
-            messages[_id] = { sender, text, chatId };
+            messages[_id] = { chatId, sender, text };
          })
          return update(store, {
             messages: { $set: messages },

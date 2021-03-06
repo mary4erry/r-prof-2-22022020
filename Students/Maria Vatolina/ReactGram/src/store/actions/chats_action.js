@@ -6,15 +6,10 @@ export const START_CHAT_CREATING = '@@chat/START_CHAT_CREATING'
 export const SUCCESS_CHAT_CREATING = '@@chat/SUCCESS_CHAT_CREATING'
 export const ERROR_CHAT_CREATING = '@@chat/ERROR_CHAT_CREATING'
 
-// export let addChat = (chatId, title) => ({
-//    type: ADD_CHAT,
-//    chatId: chatId,
-//    title: title
-// })
 export const addChat = (title) => ({
    [RSAA]: {
       endpoint: '/api/chat',                       
-      method: 'POST',                              // it works with Database only
+      method: 'POST',       // it works with Database only
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({title}),
       types: [

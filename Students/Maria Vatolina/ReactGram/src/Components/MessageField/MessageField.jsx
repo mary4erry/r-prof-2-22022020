@@ -2,42 +2,72 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
 
-import './MessageField.css'
 import { TextField, FloatingActionButton } from 'material-ui';
-import CircularProgress from 'material-ui/CircularProgress'
+import { CircularProgress, Box } from '@material-ui/core';
 import SendIcon from 'material-ui/svg-icons/content/send';
 
 import Message from '../Message/Message.jsx'
+import { withStyles } from '@material-ui/core/styles'
+
+const useStyles = (theme => ({
+   emptyBlock: {
+      height: 'calc(100vh - 178px)',
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+      alignItems: 'center',
+   },
+   msgBlock: {
+      height: 'calc(100vh - 178px)', 
+      width: '90%',
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'flex-end',
+   },
+   msgList: {
+      overflow: 'auto',
+   },
+   control:{
+      width: '90%',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+   },
+   msgInputWrapper: {
+      width: '85%',
+      marginRight: '10px',
+   },
+   sendBtn: {
+      margin: '10px',
+      backgroundColor:'lightgrey',
+      borderRadius: '30px',
+   }
+}))
 
 class MessageField extends React.Component {
    static propTypes = {
       isLoading: PropTypes.bool.isRequired,
    }
-   textInput = React.createRef();
    state = { 
       usr: 'Me',
       input: '',
    }
-   componentDidMount() {
-      this.textInput.current.focus()
+   msgList = React.createRef()
+
+   scrollToNewMsg () {
+      if (this.msgList.current && this.msgList.current.lastChild) {
+         this.msgList.current.lastChild.scrollIntoView({block: 'end'})
+      }
+   }
+   componentDidUpdate() {
+      this.scrollToNewMsg() 
    }
 
    sendMessage = (sender, text) => {
       const { messages, sendMessage, chatId } = this.props
       console.log(messages);
-      // const messageId = Object.keys(messages[chatId]).length + 1
 
-      sendMessage(chatId, messageId, sender, text)
-
-      // let newMsg = {
-      //    sender: sender,
-      //    text: text,
-      //    chatId: chatId
-      // }
-      // fetch('/api/message', {
-      //    method: 'POST', headers: { 'Content-Type': 'application/json' },
-      //    body: JSON.stringify(newMsg)
-      // })
+      sendMessage(chatId, sender, text)
    }
    
    handleSendMessage = (sender, message ) => {
@@ -56,7 +86,7 @@ class MessageField extends React.Component {
    
    render() {
       const { input } = this.state
-      const { chatId, chats } = this.props
+      const { chatId, chats, classes } = this.props
 
       const MessagesArr = []
       if (chatId) {
@@ -73,34 +103,41 @@ class MessageField extends React.Component {
          return <CircularProgress />
       }
       return ( 
-         
-      <div className='root'>
-         <div className='messageField'> 
-            { MessagesArr ? MessagesArr : '' } 
-         </div> 
-         <div className={'control'}>
-            <div className={'msgInput-wrapper'} >
-               <TextField 
-                  className={'msgInput'} 
-                  fullWidth
-                  type='text'    
-                  name='input'
-                  onChange = { this.handleChange }
-                  onKeyUp = { this.handleChange }
-                  value = { input } 
-                  ref={this.textInput}
-               /> 
-            </div>
-            
-            <FloatingActionButton
-               className={'msgSendBtn'} 
-               onClick = { () => this.handleSendMessage(this.state.usr, this.state.input)} >
-               <SendIcon /> 
-            </FloatingActionButton> 
-         </div> 
-      </div>
+         <div>
+            {!chatId && 
+               <Box className={classes.emptyBlock}>
+                  Select a chat
+               </Box> }
+            {chatId && <div>
+               <div className={classes.msgBlock}>
+                  <div className={classes.msgList} ref={ this.msgList }> 
+                     { MessagesArr ? MessagesArr : '' } 
+                  </div> 
+               </div>
+                  <div className={classes.control}>
+                     <div className={classes.msgInputWrapper} >
+                        <TextField 
+                           className={classes.msgInput}
+                           fullWidth
+                           autoFocus={ true }
+                           type='text'    
+                           name='input'
+                           onChange = { this.handleChange }
+                           onKeyUp = { this.handleChange }
+                           value = { input } 
+                        /> 
+                     </div>
+                     <FloatingActionButton
+                        className={classes.sendBtn} 
+                        onClick = { () => this.handleSendMessage(this.state.usr, this.state.input)} >
+                        <SendIcon fontSize="small"/> 
+                     </FloatingActionButton> 
+                  </div> 
+               </div>
+            }
+         </div>
       )
    }
 }
 
-export default MessageField
+export default withStyles(useStyles)(MessageField)

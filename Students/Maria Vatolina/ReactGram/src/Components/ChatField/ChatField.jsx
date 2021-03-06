@@ -64,7 +64,6 @@ class ChatField extends Component {
 
    handleChange = (event) => {
       this.setState({[event.target.name]: event.target.value})
-      // this.setState({input: event.target.value})
    }
 
    handleKeyUp = (event) => {
@@ -74,16 +73,13 @@ class ChatField extends Component {
    }
 
    handleAdd = () => {
-      const newChatId = Object.keys(this.props.chats).length + 1
-
       if (this.state.input !== ' ') {
-         this.props.addChat(newChatId, this.state.input)
-         this.props.addChatToStore(newChatId)
+         this.props.addChat(this.state.input)
          this.setState({input: ''})
       }
    }
    render() {
-      const { classes, chats, chatId, messages } = this.props
+      const { classes, chats, chatId } = this.props
       const ChatRoomsArr = []
 
       Object.keys(chats).forEach ( chatRoomId => {

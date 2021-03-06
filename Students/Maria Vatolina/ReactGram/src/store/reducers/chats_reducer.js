@@ -32,7 +32,6 @@ export default function chatReducer ( store = initialStore, action) {
          isLoading: { $set: false }
       })
    }
-   // TODO fix it ->
    case SUCCESS_CHAT_CREATING: {
       const { _id, title, messageList } = action.payload
       return update(store, {
@@ -40,7 +39,9 @@ export default function chatReducer ( store = initialStore, action) {
             $merge: { [_id]: { title, messageList } }
          }
       })
+      console.log('SUCCESS_CHAT_CREATING', chats);
    }
+   // TODO fix it ->
    // case SUCCESS_CHAT_DELETING: {
    //    const chats = {...store.chats}
    //    delete chats[action.payload._id]
