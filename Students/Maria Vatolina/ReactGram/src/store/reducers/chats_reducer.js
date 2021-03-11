@@ -2,9 +2,10 @@ import update from "react-addons-update"
 
 //import ADDONS
 import { SUCCESS_MESSAGES_LOADING,
-   SUCCESS_MESSAGE_SENDING } from '../actions/messages_action.js'
+         SUCCESS_MESSAGE_SENDING } from '../actions/messages_action.js'
 import { SUCCESS_CHATS_LOADING, 
-   SUCCESS_CHAT_CREATING } from '../actions/chats_action.js'
+         SUCCESS_CHAT_CREATING, 
+         SUCCESS_CHAT_DELETING } from '../actions/chats_action.js'
 
 const initialStore = {
    chats: {}
@@ -39,16 +40,18 @@ export default function chatReducer ( store = initialStore, action) {
             $merge: { [_id]: { title, messageList } }
          }
       })
-      console.log('SUCCESS_CHAT_CREATING', chats);
    }
    // TODO fix it ->
-   // case SUCCESS_CHAT_DELETING: {
-   //    const chats = {...store.chats}
-   //    delete chats[action.payload._id]
-   //    return update(store, {
-   //       chats: { $set: chats }
-   //    })
-   // }
+   case SUCCESS_CHAT_DELETING: {
+      console.log('SUCCESS_CHAT_DELETING', chats);
+
+      const chats = {...store.chats}
+      delete chats[action.payload._id]
+      
+      return update(store, {
+         chats: { $set: chats }
+      })
+   }
    case SUCCESS_MESSAGE_SENDING: {
       const { chatId } = action.payload
       return update(store, {

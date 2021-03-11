@@ -1,7 +1,5 @@
 import { RSAA, getJSON } from 'redux-api-middleware';
 
-// export let ADD_CHAT = '@@chat/ADD_CHAT'
-
 export const START_CHAT_CREATING = '@@chat/START_CHAT_CREATING'
 export const SUCCESS_CHAT_CREATING = '@@chat/SUCCESS_CHAT_CREATING'
 export const ERROR_CHAT_CREATING = '@@chat/ERROR_CHAT_CREATING'
@@ -19,6 +17,27 @@ export const addChat = (title) => ({
             payload: (action, state, res) => getJSON(res).then(json => json)
          },
          ERROR_CHAT_CREATING
+      ]
+   }
+})
+
+export const START_CHAT_DELETING = '@@chat/START_CHAT_DELETING'
+export const SUCCESS_CHAT_DELETING = '@@chat/SUCCESS_CHAT_DELETING'
+export const ERROR_CHAT_DELETING = '@@chat/ERROR_CHAT_DELETING'
+
+export const deleteChat = (chatId) => ({
+   [RSAA]: {
+      endpoint: '/api/chat',                       
+      method: 'DELETE',       // it works with Database only
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({chatId}),
+      types: [
+         START_CHAT_DELETING,
+         {
+            type: SUCCESS_CHAT_DELETING,
+            payload: (action, state, res) => getJSON(res).then(json => json)
+         },
+         ERROR_CHAT_DELETING
       ]
    }
 })

@@ -1,22 +1,14 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import {Link} from 'react-router-dom'
-import { Box, 
-         Divider,
-         makeStyles, 
+import { Box,
          IconButton,
          Input,
-         List, 
-         ListItem, 
-         ListItemAvatar, 
-         ListItemText, 
-         Avatar,
-         Badge } from '@material-ui/core'
+         List } from '@material-ui/core'
 import { withStyles } from '@material-ui/core/styles'
 import { AddCircle } from '@material-ui/icons'
 
-// import ChatList from './Chat'
+import Chat from './Chat'
 
 const useStyles = (theme => ({
    root: {
@@ -24,21 +16,9 @@ const useStyles = (theme => ({
       borderRight: '3px solid rgba(0, 0, 0, .1)',
       height: 'calc(100vh - 130px)',
    },
-   chatItem: {
-      cursor: 'pointer'
-   },
    newChat: {
       display: 'flex',
       flexDirection: 'row',
-   },
-   text: {
-      whiteSpace: 'nowrap',
-      overflow: 'hidden',
-      textOverflow: 'ellipsis',
-   },
-   selected: {
-      backgroundColor: theme.palette.primary.main,
-      color: theme.palette.secondary.main,
    },
 }))
 
@@ -79,7 +59,7 @@ class ChatField extends Component {
       }
    }
    render() {
-      const { classes, chats, chatId } = this.props
+      const { classes, chats, chatId, deleteChat } = this.props
       const ChatRoomsArr = []
 
       Object.keys(chats).forEach ( chatRoomId => {
@@ -88,24 +68,17 @@ class ChatField extends Component {
             let lastMsgIndex = chatMessages.length - 1
 
             ChatRoomsArr.push (
-               <ListItem className={ classes.chatItem }
-                  onClick={ () => this.handleNavigate(`/chat/${chatRoomId}`) } 
-                  selected={ chatId === +chatRoomId ? true : false }
-                  key={chatRoomId} >
-                  <ListItemAvatar>
-                     <Badge color="secondary" overlap="circle">
-                        <Avatar className={classes.avatar}>
-                           {chats[chatRoomId].title[0].toUpperCase()}
-                        </Avatar>
-                     </Badge>
-                  </ListItemAvatar>
-                  <ListItemText 
-                     className={classes.text} 
-                     primary={chats[chatRoomId].title} 
-                     secondary={chatMessages.length ? chatMessages[lastMsgIndex].text : 'no messages'}
-                     />
-                  {/* <Divider/> */}
-               </ListItem>
+               <Chat
+                  key={chatRoomId}
+                  chatMessages={chatMessages} 
+                  lastMsgIndex={lastMsgIndex}
+                  chats={chats}
+                  chatId={chatId}
+                  chatRoomId={chatRoomId}
+                  isSelected={ chatId === chatRoomId }
+                  handleNavigate={this.handleNavigate}
+                  deleteChat={deleteChat}
+               />
             )
          }
       })
