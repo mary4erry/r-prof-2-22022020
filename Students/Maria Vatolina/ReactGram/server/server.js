@@ -40,8 +40,13 @@ app.get('/chats', async (req, res) => {
 app.post('/chat', async (req, res) => {
    const chat = new Chat(req.body)
    chat = await chat.save()
-   res.send(JSON.stringify({status: 1}))
-   // res.json(chat)
+   // res.send(JSON.stringify({status: 1}))
+   res.json(chat)
+})
+app.delete('/chat', async (req, res) => {
+   await Chat.findOneAndDelete({ _id: req.body.chatId })
+   await Message.deleteMany({ chatId: req.body.chatId })
+   res.json({ _id: req.body.chatId })
 })
 
 
