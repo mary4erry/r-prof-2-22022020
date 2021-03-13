@@ -65,8 +65,6 @@ class MessageField extends React.Component {
 
    sendMessage = (sender, text) => {
       const { messages, sendMessage, chatId } = this.props
-      console.log(messages);
-
       sendMessage(chatId, sender, text)
    }
    
@@ -89,7 +87,7 @@ class MessageField extends React.Component {
       const { chatId, chats, classes } = this.props
 
       const MessagesArr = []
-      if (chatId) {
+      if (chatId && chats[chatId]) {
          let chatMessages = chats[chatId].messageList
          Object.keys(chatMessages).forEach ( messageId => 
          MessagesArr.push (
