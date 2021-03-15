@@ -3,16 +3,24 @@ import update from "react-addons-update"
 //import ADDONS
 import { SUCCESS_MESSAGES_LOADING,
          SUCCESS_MESSAGE_SENDING } from '../actions/messages_action.js'
-import { SUCCESS_CHATS_LOADING, 
+import { START_CHATS_LOADING,
+         ERROR_CHATS_LOADING,
+         SUCCESS_CHATS_LOADING, 
          SUCCESS_CHAT_CREATING, 
          SUCCESS_CHAT_DELETING } from '../actions/chats_action.js'
 
 const initialStore = {
-   chats: {}
+   chats: {},
+   isLoading: false,
 }
 
 export default function chatReducer ( store = initialStore, action) {
    switch (action.type) {
+      case START_CHATS_LOADING: {
+         return update(store, {
+            isLoading: { $set: true },
+         });
+      }
       case SUCCESS_CHATS_LOADING: {
          const chats = {}
          action.payload.forEach(chat => {
@@ -31,6 +39,11 @@ export default function chatReducer ( store = initialStore, action) {
          return update(store, {
             chats: { $set: chats },
             isLoading: { $set: false }
+         })
+      }
+      case ERROR_CHATS_LOADING: {
+         return update(store, {
+            isLoading: { $set: false },
          })
       }
       case SUCCESS_CHAT_CREATING: {

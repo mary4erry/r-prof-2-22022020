@@ -43,6 +43,7 @@ class Layout extends Component {
                      addChat={ addChat }
                      push={ push }
                      deleteChat={ deleteChat }
+                     isLoading={isLoading}
                   />
                </Grid>
                <Grid item xs={9}>

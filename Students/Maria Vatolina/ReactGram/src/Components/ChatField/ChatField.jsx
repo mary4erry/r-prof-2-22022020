@@ -9,6 +9,7 @@ import { withStyles } from '@material-ui/core/styles'
 import { AddCircle } from '@material-ui/icons'
 
 import Chat from './Chat'
+import { CircularProgress } from 'material-ui'
 
 const useStyles = (theme => ({
    root: {
@@ -30,12 +31,13 @@ class ChatField extends Component {
       }
    }
    static propTypes = {
-      // chatId: PropTypes.string.isRequired,
+      chatId: PropTypes.string.isRequired,
       chats: PropTypes.object.isRequired,
       messages: PropTypes.object.isRequired,
       addChat: PropTypes.func.isRequired,
       classes: PropTypes.object,
       push: PropTypes.func.isRequired,
+      isLoading: PropTypes.bool.isRequired,
    }
 
    handleNavigate = (link) => {
@@ -82,7 +84,9 @@ class ChatField extends Component {
             )
          }
       })
-
+      if (this.props.isLoading) {
+         return <CircularProgress />
+      }
       return (
          <Box className={ classes.root }>
             <Box className={ classes.newChat }>
